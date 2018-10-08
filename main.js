@@ -37,7 +37,6 @@ function update() {
   }
   // put the 2 types of beers above together and define dynamic grid
   let totalAmount = document.querySelectorAll(".beer").length;
-  console.log(totalAmount);
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
 
   // each tap level
@@ -46,19 +45,17 @@ function update() {
   function updateLevel(t, index) {
     let level = t.level;
     let capacity = t.capacity;
-    let targetHeight = `${Math.floor((level / capacity) * 100)}%`;
-    document.querySelector(
-      `.beer:nth-of-type(${index + 1})`
-    ).style.height = `${Math.floor((level / capacity) * 100)}%`;
-    document.querySelector(
-      `.beer:nth-of-type(${index + 1})`
-    ).style.top = `${100 - Math.floor((level / capacity) * 100)}%`;
+    let containerHeight = beerSection.getBoundingClientRect().height;
+    let eachTap = document.querySelector(`.beer:nth-of-type(${index + 1})`);
+    let currentLevel = eachTap.getBoundingClientRect().height;
+
+    let targetHeight = Math.floor((level / capacity) * containerHeight);
+    eachTap.style.height = `${targetHeight}px`;
+    eachTap.style.top = `${containerHeight - targetHeight}px`;
+    // keg warning when need changing
+
+    // change keg animation? head of bartender of keg?
   }
-  // keg warning when need changing
-
-  // change keg animation? head of bartender of keg?
-
-  // each beer pouring animation
 
   // each beer color
 

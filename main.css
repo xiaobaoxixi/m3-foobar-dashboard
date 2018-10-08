@@ -33,3 +33,9 @@ section.beers {
     opacity: 0.5;
   }
 }
+section.customers {
+  display: grid;
+}
+.customer div {
+  grid-gap: 20px;
+}

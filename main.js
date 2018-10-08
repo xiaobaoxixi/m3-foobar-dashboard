@@ -1,9 +1,10 @@
 "use strict";
 
 const beerSection = document.querySelector("section.beers");
+const customerSection = document.querySelector("section.customers");
 
 window.addEventListener("DOMContentLoaded", update);
-setInterval(update, 1000);
+setInterval(update, 10000);
 function update() {
   let data = JSON.parse(FooBar.getData());
   console.log(data);
@@ -81,5 +82,13 @@ function update() {
     }
   }
 
-  // each beer
+  // build customer section
+  let customerCount = data.queue.length;
+  customerSection.style.gridTemplateRows = `repeat(${customerCount}, 30px)`;
+  console.log(customerCount);
+  for (let i = 0; i < customerCount; i++) {
+    let eachCustomer = document.createElement("div");
+    customerSection.appendChild(eachCustomer);
+    eachCustomer.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  }
 }

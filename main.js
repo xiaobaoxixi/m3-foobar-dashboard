@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", update);
 setInterval(update, 10000);
 function update() {
   let data = JSON.parse(FooBar.getData());
-  console.log(data);
+  if (data.queue.length > 0) console.log(data.queue[0].order);
   let beers = data.beertypes;
   let taps = data.taps;
 
@@ -18,10 +18,11 @@ function update() {
   // reset beer section before append new child
   beerSection.innerHTML = "";
   taps.forEach(buildTap);
-  function buildTap(t) {
+  function buildTap(t, index) {
     let eachTap = document.createElement("div");
     eachTap.className = "beer";
     eachTap.setAttribute("data-beername", t.beer);
+    eachTap.setAttribute("data-tapindex", index);
     beerSection.appendChild(eachTap);
     // each beer color
   }
@@ -55,7 +56,6 @@ function update() {
     }
   }
   // each tap level
-  let levelS = [];
   taps.forEach(updateLevel);
   function updateLevel(t, index) {
     let level = t.level;
@@ -82,18 +82,65 @@ function update() {
     }
   }
 
-  // build customer section
+  // build customer section grid
   customerSection.innerHTML = "";
   let customerCount = data.queue.length;
   customerSection.style.gridTemplateRows = `repeat(${customerCount}, 30px)`;
-  console.log(customerCount);
-  for (let i = 0; i < customerCount; i++) {
+  for (let customerIndex = 0; customerIndex < customerCount; customerIndex++) {
     let eachCustomer = document.createElement("div");
-    customerSection.appendChild(eachCustomer);
     eachCustomer.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
     for (let j = 0; j < totalAmount; j++) {
-      let orderCount = document.createElement("div");
+      let orderCount = document.createElement("p");
+      orderCount.setAttribute("data-count", "0");
       eachCustomer.appendChild(orderCount);
     }
+    customerSection.appendChild(eachCustomer);
+  }
+  // count up how many beer of each kind did each customer order
+  if (customerCount > 0) {
+    data.queue.forEach((q, qIndex) => {
+      let eachCustomerOrderS = data.queue[qIndex].order;
+      console.log(eachCustomerOrderS);
+      eachCustomerOrderS.forEach(o => {
+        // find out the ordered beer is in which column
+        let tapIndex = Number(
+          document
+            .querySelector(`[data-beername='${o}']`)
+            .getAttribute("data-tapindex")
+        );
+        console.log("tapIndex: " + tapIndex);
+        let currentCount = document
+          .querySelector(
+            `.customers div:nth-of-type(${qIndex +
+              1}) p:nth-of-type(${tapIndex + 1})`
+          )
+          .getAttribute("data-count");
+        console.log("old count: " + currentCount);
+        currentCount++;
+        document
+          .querySelector(
+            `.customers div:nth-of-type(${qIndex +
+              1}) p:nth-of-type(${tapIndex + 1})`
+          )
+          .setAttribute("data-count", currentCount);
+        console.log("new count:" + currentCount);
+        document.querySelector(
+          `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
+            1})`
+        ).textContent = currentCount;
+
+        // currentCount++;
+        // document
+        //   .querySelector(
+        //     `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
+        //       1})`
+        //   )
+        //   .setAttribute("data-count", currentCount);
+        // document.querySelector(
+        //   `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
+        //     1})`
+        // ).textContent = currentCount;
+      });
+    });
   }
 }

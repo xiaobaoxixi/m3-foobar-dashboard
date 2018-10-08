@@ -9,7 +9,6 @@ function update() {
   console.log(data);
   let beers = data.beertypes;
   let taps = data.taps;
-  console.table(taps);
 
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
@@ -41,16 +40,19 @@ function update() {
   let totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
 
-  // check storage
-  data.storage.forEach(getStorage);
-  function getStorage(s) {
-    let storageCount = document.createElement("p");
-    storageCount.textContent = s.amount;
-    document
-      .querySelector(`[data-beername='${s.name}']`)
-      .appendChild(storageCount); // not displayed on dulplicated tap
+  // check storage of each beer, show on all if there are dulplicates
+  beerSection.querySelectorAll(".beer").forEach(checkStorage);
+  function checkStorage(b) {
+    let beerName = b.dataset.beername;
+    data.storage.forEach(checkMatch);
+    function checkMatch(s) {
+      if (s.name === beerName) {
+        let storageCount = document.createElement("p");
+        storageCount.textContent = s.amount;
+        b.appendChild(storageCount);
+      }
+    }
   }
-
   // each tap level
   let levelS = [];
   taps.forEach(updateLevel);

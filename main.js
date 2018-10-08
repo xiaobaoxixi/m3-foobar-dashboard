@@ -1,6 +1,7 @@
 "use strict";
 
 const beerSection = document.querySelector("section.beers");
+
 window.addEventListener("DOMContentLoaded", update);
 setInterval(update, 1000);
 function update() {
@@ -8,13 +9,13 @@ function update() {
   console.log(data);
   let beers = data.beertypes;
   let taps = data.taps;
-  console.log(beers, taps);
+  console.table(taps);
 
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
   // build element of the 7 taps, regardless if there is any duplication
 
-  // reset beer overview
+  // reset beer section before append new child
   beerSection.innerHTML = "";
   taps.forEach(buildTap);
   function buildTap(t) {
@@ -22,6 +23,7 @@ function update() {
     eachTap.className = "beer";
     eachTap.setAttribute("data-beername", t.beer);
     beerSection.appendChild(eachTap);
+    // each beer color
   }
   // find and build element of beers that are NOT on keg
   let beersOnKeg = [];
@@ -39,6 +41,16 @@ function update() {
   let totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
 
+  // check storage
+  data.storage.forEach(getStorage);
+  function getStorage(s) {
+    let storageCount = document.createElement("p");
+    storageCount.textContent = s.amount;
+    document
+      .querySelector(`[data-beername='${s.name}']`)
+      .appendChild(storageCount); // not displayed on dulplicated tap
+  }
+
   // each tap level
   let levelS = [];
   taps.forEach(updateLevel);
@@ -53,11 +65,19 @@ function update() {
     eachTap.style.height = `${targetHeight}px`;
     eachTap.style.top = `${containerHeight - targetHeight}px`;
     // keg warning when need changing
-
-    // change keg animation? head of bartender of keg?
+    if (
+      level / capacity < 0.1 &&
+      Number(eachTap.querySelector("p").textContent) > 0
+    ) {
+      eachTap.classList.add("change-keg");
+      // change keg animation? head of bartender of keg?
+    } else if (
+      level / capacity < 0.1 &&
+      Number(eachTap.querySelector("p").textContent) === 0
+    ) {
+      eachTap.classList.add("soon-sold-out");
+    }
   }
-
-  // each beer color
 
   // each beer
 }

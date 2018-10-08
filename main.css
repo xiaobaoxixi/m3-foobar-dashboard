@@ -4,9 +4,13 @@
   box-sizing: border-box;
   position: relative;
 }
+section.storages {
+  display: grid;
+  grid-gap: 20px;
+}
 section.beers {
   height: 300px; /* need to finalise based on svg */
-  margin: 30px;
+  margin: 0 30px;
   display: grid;
   grid-gap: 20px;
 }
@@ -17,4 +21,15 @@ section.beers {
 }
 .not-on-tap {
   opacity: 0.3;
+}
+.change-keg {
+  animation: flash 1s infinite;
+}
+.soon-sold-out {
+  animation: flash 0.5s infinite;
+}
+@keyframes flash {
+  50% {
+    opacity: 0.5;
+  }
 }

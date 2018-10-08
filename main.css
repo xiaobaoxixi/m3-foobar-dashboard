@@ -5,15 +5,15 @@
   position: relative;
 }
 section.beers {
+  height: 300px; /* need to finalise based on svg */
   margin: 30px;
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   grid-gap: 20px;
 }
 .beer {
-  height: 200px;
   width: 100%;
   background-color: darkgoldenrod;
+  bottom: 0;
 }
 .not-on-tap {
   opacity: 0.3;

@@ -2,7 +2,7 @@
 
 const beerSection = document.querySelector("section.beers");
 window.addEventListener("DOMContentLoaded", update);
-setInterval(update, 100000);
+setInterval(update, 1000);
 function update() {
   let data = JSON.parse(FooBar.getData());
   console.log(data);
@@ -13,6 +13,9 @@ function update() {
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
   // build element of the 7 taps, regardless if there is any duplication
+
+  // reset beer overview
+  beerSection.innerHTML = "";
   taps.forEach(buildTap);
   function buildTap(t) {
     let eachTap = document.createElement("div");
@@ -23,7 +26,6 @@ function update() {
   // find and build element of beers that are NOT on keg
   let beersOnKeg = [];
   taps.forEach(t => beersOnKeg.push(t.beer));
-  console.log(beersOnKeg);
   for (let i = 0; i < beers.length; i++) {
     let beerName = beers[i].name;
     if (beersOnKeg.indexOf(beerName) < 0) {
@@ -35,10 +37,23 @@ function update() {
   }
   // put the 2 types of beers above together and define dynamic grid
   let totalAmount = document.querySelectorAll(".beer").length;
+  console.log(totalAmount);
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
 
   // each tap level
-
+  let levelS = [];
+  taps.forEach(updateLevel);
+  function updateLevel(t, index) {
+    let level = t.level;
+    let capacity = t.capacity;
+    let targetHeight = `${Math.floor((level / capacity) * 100)}%`;
+    document.querySelector(
+      `.beer:nth-of-type(${index + 1})`
+    ).style.height = `${Math.floor((level / capacity) * 100)}%`;
+    document.querySelector(
+      `.beer:nth-of-type(${index + 1})`
+    ).style.top = `${100 - Math.floor((level / capacity) * 100)}%`;
+  }
   // keg warning when need changing
 
   // change keg animation? head of bartender of keg?

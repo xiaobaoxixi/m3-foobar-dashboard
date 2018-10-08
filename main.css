@@ -10,7 +10,7 @@ section.storages {
 }
 section.beers {
   height: 300px; /* need to finalise based on svg */
-  margin: 0 30px;
+  padding: 0 30px;
   display: grid;
   grid-gap: 20px;
 }
@@ -33,9 +33,11 @@ section.beers {
     opacity: 0.5;
   }
 }
-section.customers {
+section.customers,
+section.customers > div {
   display: grid;
-}
-.customer div {
   grid-gap: 20px;
+}
+section.customers {
+  padding: 0 30px;
 }

@@ -83,6 +83,7 @@ function update() {
   }
 
   // build customer section
+  customerSection.innerHTML = "";
   let customerCount = data.queue.length;
   customerSection.style.gridTemplateRows = `repeat(${customerCount}, 30px)`;
   console.log(customerCount);
@@ -90,5 +91,9 @@ function update() {
     let eachCustomer = document.createElement("div");
     customerSection.appendChild(eachCustomer);
     eachCustomer.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+    for (let j = 0; j < totalAmount; j++) {
+      let orderCount = document.createElement("div");
+      eachCustomer.appendChild(orderCount);
+    }
   }
 }

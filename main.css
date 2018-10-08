@@ -1,0 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+section.beers {
+  margin: 30px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 20px;
+}
+.beer {
+  height: 200px;
+  width: 100%;
+  background-color: darkgoldenrod;
+}
+.not-on-tap {
+  opacity: 0.3;
+}

@@ -14,6 +14,8 @@ let beers;
 let beerData = [];
 let totalAmount;
 let bartenderS;
+let orderList = [];
+let allSell = [];
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
@@ -225,7 +227,6 @@ function update() {
             .querySelector(`[data-beername='${o}']`)
             .getAttribute("data-tapindex")
         );
-        //        console.log("tapIndex: " + tapIndex);
         let currentCount = document
           .querySelector(
             `.customers div:nth-of-type(${qIndex +
@@ -279,9 +280,20 @@ function update() {
             1}) p:nth-of-type(${tapIndex + 1})`
         ).textContent = currentCount;
       });
+      // orders from customer in queue decide which beer is popular
+      // prevent duplicated input of the same id's order (at every refresh, queue data will overlap the previous result of queue)
+      orderList = orderList.filter(o => o.id !== data.queue[qIndex].id);
+      let ordersString = eachCustomerOrderS.join();
+      orderList.push({
+        id: data.queue[qIndex].id,
+        order: ordersString
+      });
     });
+    console.log(orderList);
+    allSell = [];
+    orderList.forEach(oL => allSell.push(oL.order));
+    console.log(allSell.join());
   }
-
   // position bartender
   bartenderS = data.bartenders;
   bartenderS.forEach(updateBartender);

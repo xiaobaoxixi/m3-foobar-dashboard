@@ -1,6 +1,7 @@
 "use strict";
 
-const tagS = document.querySelectorAll(".tags li");
-const cateS = document.querySelectorAll(".categories li");
-
-console.log(cateS);
+const popular = document.querySelector(".popular");
+popular.addEventListener("click", getPopular);
+function getPopular() {
+  console.log("tagClicked");
+}

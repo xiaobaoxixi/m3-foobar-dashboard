@@ -50,9 +50,9 @@ function init() {
   totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
 
-  imgKegs.style.width = ((window.innerWidth - 260) * 7) / totalAmount + "px";
+  imgKegs.style.width = ((window.innerWidth - 100) * 7) / totalAmount + "px"; // 100(px) is the padding on the sides
   beerSection.style.height =
-    (((window.innerWidth - 260) * 7) / totalAmount / 1440) * 463 + "px";
+    (((window.innerWidth - 100) * 7) / totalAmount / 1440) * 463 + "px";
   // bartender section, same grid as above so they all line up
   bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   // generate bartenders
@@ -99,7 +99,7 @@ function update() {
     eachTap.style.height = `${targetHeight}px`;
     eachTap.style.top = `${containerHeight - targetHeight}px`;
     // beer heading font size based on available height
-    eachTap.querySelector("h1").style.fontSize = targetHeight * 0.12 + "px";
+    eachTap.querySelector("h1").style.fontSize = targetHeight * 0.11 + "px";
     // keg warning when need changing
     if (
       level / capacity < 0.1 &&

@@ -11,7 +11,8 @@ setInterval(update, 1000);
 function update() {
   let data = JSON.parse(FooBar.getData());
   console.log(data);
-  console.table(data.bartenders);
+  //  console.table(data.bartenders);
+  console.table(data.serving);
   let beers = data.beertypes;
   let taps = data.taps;
 
@@ -131,10 +132,10 @@ function update() {
     }
     customerSection.appendChild(eachCustomer);
   }
-  // count up how many beer of each kind did each customer order
-  if (customerInQueueCount > 0) {
-    data.queue.forEach((q, qIndex) => {
-      let eachCustomerOrderS = data.queue[qIndex].order;
+  // count up how many beer of each kind did each customer order, both in serving and in queue
+  if (customerInServingCount > 0) {
+    data.serving.forEach((q, qIndex) => {
+      let eachCustomerOrderS = data.serving[qIndex].order;
       //      console.log(eachCustomerOrderS);
       eachCustomerOrderS.forEach(o => {
         // find out the ordered beer is in which column
@@ -160,6 +161,41 @@ function update() {
         document.querySelector(
           `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
             1})`
+        ).textContent = currentCount;
+      });
+    });
+  }
+  if (customerInQueueCount > 0) {
+    data.queue.forEach((q, qIndex) => {
+      let eachCustomerOrderS = data.queue[qIndex].order;
+      //      console.log(eachCustomerOrderS);
+      eachCustomerOrderS.forEach(o => {
+        // find out the ordered beer is in which column
+        let tapIndex = Number(
+          document
+            .querySelector(`[data-beername='${o}']`)
+            .getAttribute("data-tapindex")
+        );
+        //        console.log("tapIndex: " + tapIndex);
+        let currentCount = document
+          .querySelector(
+            `.customers div:nth-of-type(${qIndex +
+              customerInServingCount +
+              1}) p:nth-of-type(${tapIndex + 1})`
+          )
+          .getAttribute("data-count");
+        currentCount++;
+        document
+          .querySelector(
+            `.customers div:nth-of-type(${qIndex +
+              customerInServingCount +
+              1}) p:nth-of-type(${tapIndex + 1})`
+          )
+          .setAttribute("data-count", currentCount);
+        document.querySelector(
+          `.customers div:nth-of-type(${qIndex +
+            customerInServingCount +
+            1}) p:nth-of-type(${tapIndex + 1})`
         ).textContent = currentCount;
       });
 

@@ -3,7 +3,7 @@
 const beerSection = document.querySelector("section.beers");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
-
+const imgKegs = document.querySelector(".imgKegs");
 let taps;
 let beers;
 let totalAmount;
@@ -48,6 +48,10 @@ function init() {
   // put the 2 types of beers above together and define dynamic grid
   totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+
+  imgKegs.style.width = ((window.innerWidth - 260) * 7) / totalAmount + "px";
+  beerSection.style.height =
+    (((window.innerWidth - 260) * 7) / totalAmount / 1440) * 463 + "px";
   // bartender section, same grid as above so they all line up
   bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   // generate bartenders

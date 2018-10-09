@@ -6,13 +6,13 @@
 }
 section.storages {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 0;
 }
 section.beers {
   height: 300px; /* need to finalise based on svg */
   padding: 0 130px;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 0;
 }
 .beer {
   width: 100%;
@@ -37,7 +37,7 @@ section.beers {
 section.customers,
 section.customers > div {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 0;
 }
 section.customers > div > * {
   border-bottom: 1px solid black;
@@ -61,4 +61,13 @@ section.bartenders {
 }
 .hide {
   display: none;
+}
+.imgKegs {
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 130px;
+}
+.imgKegs img {
+  width: 100%;
 }

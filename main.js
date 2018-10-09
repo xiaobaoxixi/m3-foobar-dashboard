@@ -17,6 +17,7 @@ let bartenderS;
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
+  console.log(data);
   beers = data.beertypes;
   beers.forEach(getCategory);
   function getCategory(b) {
@@ -34,6 +35,7 @@ function init() {
   cateS.forEach(c => {
     c.addEventListener("click", function(m) {
       let cate = m.target.textContent;
+      console.log(cate);
       if (document.querySelector(`[data-cate='${cate}']`)) {
         document.querySelectorAll(`[data-cate='${cate}']`).forEach(a => {
           a.classList.add("found");

@@ -45,7 +45,7 @@ section.customers > div > * {
 }
 section.customers,
 section.bartenders {
-  padding: 0 130px;
+  padding: 0 50px;
 }
 section.bartenders {
   display: grid;

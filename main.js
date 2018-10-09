@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", update);
 setInterval(update, 10000);
 function update() {
   let data = JSON.parse(FooBar.getData());
-  if (data.queue.length > 0) console.log(data.queue[0].order);
+  console.log(data);
   let beers = data.beertypes;
   let taps = data.taps;
 
@@ -88,11 +88,12 @@ function update() {
   customerSection.style.gridTemplateRows = `repeat(${customerCount}, 30px)`;
   for (let customerIndex = 0; customerIndex < customerCount; customerIndex++) {
     let eachCustomer = document.createElement("div");
+    eachCustomer.setAttribute("data-ordernr", data.queue[customerIndex].id);
     eachCustomer.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
     for (let j = 0; j < totalAmount; j++) {
-      let orderCount = document.createElement("p");
-      orderCount.setAttribute("data-count", "0");
-      eachCustomer.appendChild(orderCount);
+      let beerCount = document.createElement("p");
+      beerCount.setAttribute("data-count", "0");
+      eachCustomer.appendChild(beerCount);
     }
     customerSection.appendChild(eachCustomer);
   }
@@ -100,6 +101,7 @@ function update() {
   if (customerCount > 0) {
     data.queue.forEach((q, qIndex) => {
       let eachCustomerOrderS = data.queue[qIndex].order;
+      console.log("QUEUE length: " + data.queue.length);
       console.log(eachCustomerOrderS);
       eachCustomerOrderS.forEach(o => {
         // find out the ordered beer is in which column
@@ -115,7 +117,6 @@ function update() {
               1}) p:nth-of-type(${tapIndex + 1})`
           )
           .getAttribute("data-count");
-        console.log("old count: " + currentCount);
         currentCount++;
         document
           .querySelector(
@@ -123,24 +124,13 @@ function update() {
               1}) p:nth-of-type(${tapIndex + 1})`
           )
           .setAttribute("data-count", currentCount);
-        console.log("new count:" + currentCount);
         document.querySelector(
           `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
             1})`
         ).textContent = currentCount;
-
-        // currentCount++;
-        // document
-        //   .querySelector(
-        //     `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
-        //       1})`
-        //   )
-        //   .setAttribute("data-count", currentCount);
-        // document.querySelector(
-        //   `.customers div:nth-of-type(${qIndex + 1}) p:nth-of-type(${tapIndex +
-        //     1})`
-        // ).textContent = currentCount;
       });
+
+      // who is serving which order, which beer
     });
   }
 }

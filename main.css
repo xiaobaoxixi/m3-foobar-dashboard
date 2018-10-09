@@ -38,8 +38,15 @@ section.customers > div {
   display: grid;
   grid-gap: 20px;
 }
-section.customers {
+section.customers > div > * {
+  border-bottom: 1px solid black;
+}
+section.customers,
+section.bartenders {
   padding: 0 130px;
+}
+section.bartenders {
+  display: grid;
 }
 .bartender {
   width: 30px;
@@ -49,4 +56,7 @@ section.customers {
 }
 .serving {
   color: red;
+}
+.hide {
+  display: none;
 }

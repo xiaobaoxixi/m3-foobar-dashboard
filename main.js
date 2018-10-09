@@ -2,17 +2,18 @@
 
 const beerSection = document.querySelector("section.beers");
 const customerSection = document.querySelector("section.customers");
-const peter = document.querySelector(".p");
-const martin = document.querySelector(".m");
-const jonas = document.querySelector(".j");
+const bartenderSection = document.querySelector("section.bartenders");
+const bartender1 = document.querySelector(".bartender:nth-of-type(1)");
+const bartender2 = document.querySelector(".bartender:nth-of-type(2)");
+const bartender3 = document.querySelector(".bartender:nth-of-type(3)");
 
 window.addEventListener("DOMContentLoaded", update);
-setInterval(update, 1000);
 function update() {
   let data = JSON.parse(FooBar.getData());
+  setInterval(update, 10000);
   console.log(data);
   //  console.table(data.bartenders);
-  console.table(data.serving);
+  //  console.table(data.serving);
   let beers = data.beertypes;
   let taps = data.taps;
 
@@ -92,12 +93,12 @@ function update() {
   customerSection.innerHTML = "";
   let customerInServingCount = data.serving.length;
   let customerInQueueCount = data.queue.length;
-  console.log(
-    "QUEUE length: " +
-      customerInQueueCount +
-      " SERVERING length: " +
-      customerInServingCount
-  );
+  // console.log(
+  //   "QUEUE length: " +
+  //     customerInQueueCount +
+  //     " SERVERING length: " +
+  //     customerInServingCount
+  // );
   customerSection.style.gridTemplateRows = `repeat(${customerInQueueCount +
     customerInServingCount}, 30px)`;
   for (
@@ -198,8 +199,31 @@ function update() {
             1}) p:nth-of-type(${tapIndex + 1})`
         ).textContent = currentCount;
       });
-
-      // who is serving which order, which beer
     });
+  }
+  // grid bartender section
+  bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  bartenderSection.innerHTML = "";
+  // generate bartenders
+  let bartenderS = data.bartenders;
+  bartenderS.forEach(generateBartender);
+  function generateBartender(b, bIndex) {
+    let bartender = document.createElement("div");
+    bartender.className = "bartender hide";
+    bartenderSection.appendChild(bartender);
+    // get each bartenders tap position
+    if (b.usingTap) {
+      let onTapNr = b.usingTap;
+      document
+        .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
+        .classList.remove("hide");
+      document.querySelector(
+        `.bartender:nth-of-type(${bIndex + 1})`
+      ).style.gridColumnStart = onTapNr;
+      document.querySelector(
+        `.bartender:nth-of-type(${bIndex + 1})`
+      ).style.gridRowStart = "1";
+      console.log(onTapNr);
+    }
   }
 }

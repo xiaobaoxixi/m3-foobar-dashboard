@@ -39,7 +39,7 @@ section.storages {
   grid-gap: 0;
 }
 section.customers > div > * {
-  border-bottom: 1px solid black;
+  border-bottom: 3px dotted rgba(255, 255, 255, 0.7);
 }
 section.customers,
 section.bartenders,
@@ -66,7 +66,7 @@ section.bartenders {
 .imgKegs-offtap {
   height: auto;
   position: fixed;
-  top: 13vh;
+  top: 17vh;
   left: 50px;
 }
 .imgKegs img,
@@ -75,7 +75,7 @@ section.bartenders {
 }
 main {
   background-color: #333333;
-  padding: 13vh 0;
+  padding: 17vh 0;
   height: 100vh;
   overflow: hidden;
 }
@@ -93,4 +93,24 @@ section.glasses {
 }
 section.glasses > div {
   height: 100%;
+}
+aside {
+  height: 12vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding-top: 10px;
+  padding-left: 50px;
+}
+aside li {
+  display: inline-block;
+  line-height: 40px;
+  margin-right: 30px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #333333;
+}
+.categories {
+  text-align: right;
 }

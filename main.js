@@ -6,6 +6,9 @@ const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");
 const imgKegsOfftap = document.querySelector(".imgKegs-offtap");
+const tags = document.querySelector(".tags");
+const categories = document.querySelector(".categories");
+let beerCategoris = [];
 let taps;
 let beers;
 let beerData = [];
@@ -15,6 +18,19 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
   beers = data.beertypes;
+  beers.forEach(getCategory);
+  function getCategory(b) {
+    if (beerCategoris.indexOf(b.category) < 0) {
+      beerCategoris.push(b.category);
+    }
+  }
+  console.log(beerCategoris);
+  beerCategoris.forEach(addTag);
+  function addTag(bC) {
+    let cate = document.createElement("li");
+    cate.textContent = bC;
+    categories.appendChild(cate);
+  }
   taps = data.taps;
   fetch("beerinfo.json")
     .then(data => data.json())

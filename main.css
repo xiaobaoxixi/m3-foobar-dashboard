@@ -62,13 +62,15 @@ section.bartenders {
 .hide {
   display: none;
 }
-.imgKegs {
+.imgKegs,
+.imgKegs-offtap {
   height: auto;
   position: fixed;
   top: 13vh;
   left: 50px;
 }
-.imgKegs img {
+.imgKegs img,
+.imgKegs-offtap img {
   width: 100%;
 }
 main {

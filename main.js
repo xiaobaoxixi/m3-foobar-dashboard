@@ -5,6 +5,7 @@ const glassSection = document.querySelector("section.glasses");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");
+const imgKegsOfftap = document.querySelector(".imgKegs-offtap");
 let taps;
 let beers;
 let beerData = [];
@@ -69,6 +70,10 @@ function buildStructure(data) {
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   glassSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   imgKegs.style.width = ((window.innerWidth - 100) * 7) / totalAmount + "px"; // 100(px) is the padding on the sides
+  imgKegsOfftap.style.width =
+    (((window.innerWidth - 100) * 7) / totalAmount / 7) * 9 + "px"; // offtap image has 9 kegs while imgKegs has 7
+  imgKegsOfftap.style.left =
+    ((window.innerWidth - 100) * 7) / totalAmount + 50 + "px";
   beerSection.style.height =
     (((window.innerWidth - 100) * 7) / totalAmount / 1440) * 463 + "px";
   // bartender section, same grid as above so they all line up

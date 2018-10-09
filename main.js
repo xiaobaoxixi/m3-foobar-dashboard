@@ -239,7 +239,7 @@ function update() {
       document.querySelector(
         `[data-name='${bartenderName}']`
       ).style.gridColumnStart = b.usingTap + 1;
-      console.log(b.name + "serving nr: " + b.servingCustomer);
+      //      console.log(b.name + "on tap nr: " + b.usingTap);
       // put bartender on the row of of the customer he's serving
       let customerPosition = document
         .querySelector("[data-ordernr='" + b.servingCustomer + "']")
@@ -247,16 +247,36 @@ function update() {
       let originalBartenderPosition = document
         .querySelector(`[data-name='${bartenderName}']`)
         .getBoundingClientRect().top;
-      console.log(originalBartenderPosition);
       document.querySelector(
         `[data-name='${bartenderName}']`
       ).style.top = `${customerPosition - originalBartenderPosition}px`;
       document.querySelector(`[data-name='${bartenderName}']`).style.left =
         "20px";
-    } else {
+    } else if (b.statusDetail === "releaseTap") {
       document
         .querySelector(`[data-name='${bartenderName}']`)
         .classList.add("hide");
+
+      let finishedBeer = document.querySelector(
+        `[data-ordernr='${b.servingCustomer}'] p:nth-of-type(${
+          document.querySelector(`[data-name='${bartenderName}']`).style
+            .gridColumnStart
+        })`
+      );
+      let currentOrderCount = finishedBeer.textContent;
+      finishedBeer.textContent = currentOrderCount - 1;
+      if (currentOrderCount === 1) {
+        finishedBeer.classList.add("hide");
+      }
+      // console.log(
+      //   b.name +
+      //     "is" +
+      //     document.querySelector(`[data-name='${bartenderName}']`).style
+      //       .gridColumnStart +
+      //     " cN " +
+      //     b.servingCustomer
+      // );
+    } else if (!b.usingTap) {
     }
   }
   setTimeout(update, 1000);

@@ -53,6 +53,7 @@ section.bartenders {
   height: 30px;
   border-radius: 50%;
   border: 1px solid black;
+  grid-row-start: 1;
 }
 .serving {
   color: red;

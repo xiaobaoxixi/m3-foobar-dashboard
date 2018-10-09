@@ -3,19 +3,18 @@
 const beerSection = document.querySelector("section.beers");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
-const bartender1 = document.querySelector(".bartender:nth-of-type(1)");
-const bartender2 = document.querySelector(".bartender:nth-of-type(2)");
-const bartender3 = document.querySelector(".bartender:nth-of-type(3)");
 
-window.addEventListener("DOMContentLoaded", update);
-function update() {
+let taps;
+let beers;
+let totalAmount;
+window.addEventListener("DOMContentLoaded", init);
+function init() {
   let data = JSON.parse(FooBar.getData());
-  setInterval(update, 3000);
-  console.log(data);
+  //  console.log(data);
   //  console.table(data.bartenders);
   //  console.table(data.serving);
-  let beers = data.beertypes;
-  let taps = data.taps;
+  beers = data.beertypes;
+  taps = data.taps;
 
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
@@ -30,7 +29,8 @@ function update() {
     eachTap.setAttribute("data-beername", t.beer);
     eachTap.setAttribute("data-tapindex", index);
     beerSection.appendChild(eachTap);
-    // each beer color
+    // get matching color of each beer
+    // get matching glass of each beer
   }
   // find and build element of beers that are NOT on keg
   let beersOnKeg = [];
@@ -45,12 +45,33 @@ function update() {
     }
   }
   // put the 2 types of beers above together and define dynamic grid
-  let totalAmount = document.querySelectorAll(".beer").length;
+  totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  // bartender section, same grid as above so they all line up
+  bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  // generate bartenders
+  let bartenderS = data.bartenders;
+  bartenderS.forEach(generateBartender);
+  function generateBartender(b, bIndex) {
+    let bartender = document.createElement("div");
+    bartender.className = "bartender";
+    bartender.setAttribute("onTap", b.usingTap + 1);
+    bartender.setAttribute("servingCustomer", b.servingCustomer);
+    if (b.statusDetail) {
+      bartender.setAttribute("work", b.statusDetail);
+    }
+    bartender.textContent = b.name[0];
+    bartenderSection.appendChild(bartender);
+  }
+  update();
+}
 
+function update() {
+  let data = JSON.parse(FooBar.getData());
   // check storage of each beer, show on all if there are dulplicates
   beerSection.querySelectorAll(".beer").forEach(checkStorage);
   function checkStorage(b) {
+    b.innerHTML = "";
     let beerName = b.dataset.beername;
     data.storage.forEach(checkMatch);
     function checkMatch(s) {
@@ -61,7 +82,8 @@ function update() {
       }
     }
   }
-  // each tap level
+  // check each tap level
+  taps = data.taps;
   taps.forEach(updateLevel);
   function updateLevel(t, index) {
     let level = t.level;
@@ -69,7 +91,6 @@ function update() {
     let containerHeight = beerSection.getBoundingClientRect().height;
     let eachTap = document.querySelector(`.beer:nth-of-type(${index + 1})`);
     let currentLevel = eachTap.getBoundingClientRect().height;
-
     let targetHeight = Math.floor((level / capacity) * containerHeight);
     eachTap.style.height = `${targetHeight}px`;
     eachTap.style.top = `${containerHeight - targetHeight}px`;
@@ -93,14 +114,9 @@ function update() {
   customerSection.innerHTML = "";
   let customerInServingCount = data.serving.length;
   let customerInQueueCount = data.queue.length;
-  // console.log(
-  //   "QUEUE length: " +
-  //     customerInQueueCount +
-  //     " SERVERING length: " +
-  //     customerInServingCount
-  // );
   customerSection.style.gridTemplateRows = `repeat(${customerInQueueCount +
     customerInServingCount}, 30px)`;
+  // generate each customer under service
   for (
     let customerIndex = 0;
     customerIndex < customerInServingCount;
@@ -117,7 +133,7 @@ function update() {
     }
     customerSection.appendChild(eachCustomer);
   }
-
+  // generate each customer in queue
   for (
     let customerIndex = 0;
     customerIndex < customerInQueueCount;
@@ -201,49 +217,39 @@ function update() {
       });
     });
   }
-  // grid bartender section
-  bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
-  bartenderSection.innerHTML = "";
-  // generate bartenders
-  let bartenderS = data.bartenders;
-  bartenderS.forEach(generateBartender);
-  function generateBartender(b, bIndex) {
-    let bartender = document.createElement("div");
-    bartender.className = "bartender hide";
-    bartender.textContent = b.name[0];
-    bartenderSection.appendChild(bartender);
-    // get each bartenders tap position
-    if (b.usingTap) {
-      let onTapNr = b.usingTap + 1;
-      let servingCustomerNr = b.servingCustomer;
-      document
-        .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
-        .classList.remove("hide");
-      document.querySelector(
-        `.bartender:nth-of-type(${bIndex + 1})`
-      ).style.gridColumnStart = onTapNr;
-      document.querySelector(
-        `.bartender:nth-of-type(${bIndex + 1})`
-      ).style.gridRowStart = "1";
-      console.log(
-        b.name +
-          " is using tap " +
-          onTapNr +
-          " serving customer " +
-          servingCustomerNr
-      );
-      let customerPosition = document
-        .querySelector("[data-ordernr='" + servingCustomerNr + "']")
-        .getBoundingClientRect().top;
-      let originalBartenderPosition = document
-        .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
-        .getBoundingClientRect().top;
-      document.querySelector(
-        `.bartender:nth-of-type(${bIndex + 1})`
-      ).style.top = `${customerPosition - originalBartenderPosition}px`;
-      document.querySelector(
-        `.bartender:nth-of-type(${bIndex + 1})`
-      ).style.left = "20px"; // temp solution, so that PMJ won't cover up order nr
-    }
-  }
+
+  // position bartender
+  document.querySelectorAll(".bartenders>div");
+  //   // get each bartenders tap position
+  //   if (b.usingTap) {
+  //     let onTapNr = b.usingTap + 1;
+  //     let servingCustomerNr = b.servingCustomer;
+  //     // document
+  //     //   .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
+  //     //   .classList.remove("hide");
+  //     document.querySelector(
+  //       `.bartender:nth-of-type(${bIndex + 1})`
+  //     ).style.gridColumnStart = onTapNr;
+  //     document.querySelector(
+  //       `.bartender:nth-of-type(${bIndex + 1})`
+  //     ).style.gridRowStart = "1";
+  //     console.log(
+  //       b.name + " on tap " + onTapNr + " serving customer " + servingCustomerNr
+  //     );
+  //     let customerPosition = document
+  //       .querySelector("[data-ordernr='" + servingCustomerNr + "']")
+  //       .getBoundingClientRect().top;
+  //     let originalBartenderPosition = document
+  //       .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
+  //       .getBoundingClientRect().top;
+  //     document.querySelector(
+  //       `.bartender:nth-of-type(${bIndex + 1})`
+  //     ).style.top = `${customerPosition - originalBartenderPosition}px`;
+  //     document.querySelector(
+  //       `.bartender:nth-of-type(${bIndex + 1})`
+  //     ).style.left = "20px"; // temp solution, so that PMJ won't cover up order nr
+  //   }
+  // }
+
+  setTimeout(update, 1000);
 }

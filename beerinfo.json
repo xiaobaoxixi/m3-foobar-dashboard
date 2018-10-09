@@ -23,7 +23,7 @@
     "end": "dry"
   },
   {
-    "name": "Githop",
+    "name": "GitHop",
     "head": "good-headstand.png",
     "category": "IPA",
     "appearance": "gold to red",
@@ -46,7 +46,7 @@
     "end": "dry"
   },
   {
-    "name": "Hoppily ever after",
+    "name": "Hoppily Ever After",
     "head": "good-headstand.png",
     "category": "IPA",
     "appearance": "gold to red",
@@ -82,7 +82,7 @@
   {
     "name": "Ruined Childhood",
     "head": "head-retention.png",
-    "category": "Belgian Speciality Ale",
+    "category": "Belgian Specialty Ale",
     "appearance": "gold to dark",
     "hoplevel": "1, 5",
     "maltlevel": "1, 5",
@@ -92,7 +92,7 @@
   {
     "name": "Sleighride",
     "head": "head-retention.png",
-    "category": "Belgian Speciality Ale",
+    "category": "Belgian Specialty Ale",
     "appearance": "gold to dark",
     "hoplevel": "1, 5",
     "maltlevel": "1, 5",

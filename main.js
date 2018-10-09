@@ -11,16 +11,14 @@ let bartenderS;
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
-  //  console.log(data);
+  console.log(data.taps);
   //  console.table(data.bartenders);
   //  console.table(data.serving);
   beers = data.beertypes;
   taps = data.taps;
-
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
   // build element of the 7 taps, regardless if there is any duplication
-
   // reset beer section before append new child
   beerSection.innerHTML = "";
   taps.forEach(buildTap);
@@ -29,6 +27,9 @@ function init() {
     eachTap.className = "beer";
     eachTap.setAttribute("data-beername", t.beer);
     eachTap.setAttribute("data-tapindex", index);
+    let beerHeading = document.createElement("h1");
+    beerHeading.textContent = t.beer;
+    eachTap.appendChild(beerHeading);
     beerSection.appendChild(eachTap);
     // get matching color of each beer
     // get matching glass of each beer
@@ -77,14 +78,12 @@ function update() {
   // check storage of each beer, show on all if there are dulplicates
   beerSection.querySelectorAll(".beer").forEach(checkStorage);
   function checkStorage(b) {
-    b.innerHTML = "";
+    //  b.innerHTML = "";
     let beerName = b.dataset.beername;
     data.storage.forEach(checkMatch);
     function checkMatch(s) {
       if (s.name === beerName) {
-        let storageCount = document.createElement("p");
-        storageCount.textContent = s.amount;
-        b.appendChild(storageCount);
+        b.setAttribute("data-storage", s.amount);
       }
     }
   }
@@ -99,16 +98,18 @@ function update() {
     let targetHeight = Math.floor((level / capacity) * containerHeight);
     eachTap.style.height = `${targetHeight}px`;
     eachTap.style.top = `${containerHeight - targetHeight}px`;
+    // beer heading font size based on available height
+    eachTap.querySelector("h1").style.fontSize = targetHeight * 0.12 + "px";
     // keg warning when need changing
     if (
       level / capacity < 0.1 &&
-      Number(eachTap.querySelector("p").textContent) > 0
+      Number(eachTap.getAttribute("data-storage")) > 0
     ) {
       eachTap.classList.add("change-keg");
       // change keg animation? head of bartender of keg?
     } else if (
       level / capacity < 0.1 &&
-      Number(eachTap.querySelector("p").textContent) === 0
+      Number(eachTap.getAttribute("data-storage")) === 0
     ) {
       eachTap.classList.add("soon-sold-out");
     }

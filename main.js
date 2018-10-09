@@ -234,24 +234,25 @@ function update() {
       document
         .querySelector(`[data-name='${bartenderName}']`)
         .classList.remove("hide");
+      document.querySelector(`[data-name='${bartenderName}']`).style.top = "0";
       // put bartender in the column where the tap is used
       document.querySelector(
         `[data-name='${bartenderName}']`
       ).style.gridColumnStart = b.usingTap + 1;
-      console.log(b.name + b.usingTap);
+      console.log(b.name + "serving nr: " + b.servingCustomer);
       // put bartender on the row of of the customer he's serving
-      // let customerPosition = document
-      //   .querySelector("[data-ordernr='" + b.servingCustomer + "']")
-      //   .getBoundingClientRect().top;
-      // let originalBartenderPosition = document
-      //   .querySelector(`[data-name='${bartenderName}']`)
-      //   .getBoundingClientRect().top;
-      // console.log(originalBartenderPosition);
-      // document.querySelector(
-      //   `[data-name='${bartenderName}']`
-      // ).style.top = `${customerPosition - originalBartenderPosition}px`;
-      // document.querySelector(`[data-name='${bartenderName}']`).style.left =
-      //   "20px";
+      let customerPosition = document
+        .querySelector("[data-ordernr='" + b.servingCustomer + "']")
+        .getBoundingClientRect().top;
+      let originalBartenderPosition = document
+        .querySelector(`[data-name='${bartenderName}']`)
+        .getBoundingClientRect().top;
+      console.log(originalBartenderPosition);
+      document.querySelector(
+        `[data-name='${bartenderName}']`
+      ).style.top = `${customerPosition - originalBartenderPosition}px`;
+      document.querySelector(`[data-name='${bartenderName}']`).style.left =
+        "20px";
     } else {
       document
         .querySelector(`[data-name='${bartenderName}']`)

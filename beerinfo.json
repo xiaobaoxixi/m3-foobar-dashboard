@@ -1,0 +1,114 @@
+[
+  {
+    "name": "El Hefe",
+    "head": "big-longlasting.png",
+    "clarity": "brilliant to hazy",
+    "category": "Hefeweizen",
+    "appearance": "yellow to gold",
+    "esterlevel": "0, 3",
+    "hoplevel": "1, 3 ",
+    "maltlevel": "2",
+    "carbonation": "3, 5",
+    "mouthfeel": "1, 5"
+  },
+  {
+    "name": "Fairy Tale Ale",
+    "head": "good-headstand.png",
+    "category": "IPA",
+    "appearance": "gold to red",
+    "hoplevel": "3, 5",
+    "maltlevel": "1, 3",
+    "carbonation": "1",
+    "mouthfeel": "2, 3",
+    "end": "dry"
+  },
+  {
+    "name": "Githop",
+    "head": "good-headstand.png",
+    "category": "IPA",
+    "appearance": "gold to red",
+    "hoplevel": "3, 5",
+    "maltlevel": "1, 3",
+    "carbonation": "1",
+    "mouthfeel": "2, 3",
+    "end": "dry"
+  },
+  {
+    "name": "Hollaback Lager",
+    "head": "foam-stand.png",
+    "category": "Oktoberfest",
+    "appearance": "gold to orange-red",
+    "hoplevel": "3",
+    "maltlevel": "",
+    "carbonation": "3",
+    "mouthfeel": "3",
+    "inital": "sweet",
+    "end": "dry"
+  },
+  {
+    "name": "Hoppily ever after",
+    "head": "good-headstand.png",
+    "category": "IPA",
+    "appearance": "gold to red",
+    "hoplevel": "4",
+    "maltlevel": "1",
+    "carbonation": "3, 4",
+    "mouthfeel": "2, 3",
+    "finish": "dry"
+  },
+  {
+    "name": "Mowintime",
+    "head": "foam-stand.png",
+    "category": "European Lager",
+    "appearance": "gold to orange-red",
+    "hoplevel": "3",
+    "maltlevel": "",
+    "carbonation": "3",
+    "mouthfeel": "3",
+    "inital": "sweet",
+    "end": "dry"
+  },
+  {
+    "name": "Row 26",
+    "head": "large-brown.png",
+    "category": "Stout",
+    "appearance": "black",
+    "hoplevel": "1, 5",
+    "maltlevel": "1, 5",
+    "carbonation": "3, 5",
+    "mouthfeel": "3, 5",
+    "end": "dry"
+  },
+  {
+    "name": "Ruined Childhood",
+    "head": "head-retention.png",
+    "category": "Belgian Speciality Ale",
+    "appearance": "gold to dark",
+    "hoplevel": "1, 5",
+    "maltlevel": "1, 5",
+    "carbonation": "3, 4",
+    "mouthfeel": "1, 5"
+  },
+  {
+    "name": "Sleighride",
+    "head": "head-retention.png",
+    "category": "Belgian Speciality Ale",
+    "appearance": "gold to dark",
+    "hoplevel": "1, 5",
+    "maltlevel": "1, 5",
+    "carbonation": "3, 4",
+    "mouthfeel": "1, 5"
+  },
+
+  {
+    "name": "Steampunk",
+    "head": "head-retention.png",
+    "category": "California Common",
+    "appearance": "amber to red",
+    "hoplevel": "2, 3",
+    "maltlevel": "3",
+    "carbonation": "3, 4",
+    "mouthfeel": "3",
+    "end": "dry and crips"
+  }
+]

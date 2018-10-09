@@ -10,7 +10,7 @@ const bartender3 = document.querySelector(".bartender:nth-of-type(3)");
 window.addEventListener("DOMContentLoaded", update);
 function update() {
   let data = JSON.parse(FooBar.getData());
-  setInterval(update, 10000);
+  setInterval(update, 3000);
   console.log(data);
   //  console.table(data.bartenders);
   //  console.table(data.serving);
@@ -210,10 +210,12 @@ function update() {
   function generateBartender(b, bIndex) {
     let bartender = document.createElement("div");
     bartender.className = "bartender hide";
+    bartender.textContent = b.name[0];
     bartenderSection.appendChild(bartender);
     // get each bartenders tap position
     if (b.usingTap) {
-      let onTapNr = b.usingTap;
+      let onTapNr = b.usingTap + 1;
+      let servingCustomerNr = b.servingCustomer;
       document
         .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
         .classList.remove("hide");
@@ -223,7 +225,25 @@ function update() {
       document.querySelector(
         `.bartender:nth-of-type(${bIndex + 1})`
       ).style.gridRowStart = "1";
-      console.log(onTapNr);
+      console.log(
+        b.name +
+          " is using tap " +
+          onTapNr +
+          " serving customer " +
+          servingCustomerNr
+      );
+      let customerPosition = document
+        .querySelector("[data-ordernr='" + servingCustomerNr + "']")
+        .getBoundingClientRect().top;
+      let originalBartenderPosition = document
+        .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
+        .getBoundingClientRect().top;
+      document.querySelector(
+        `.bartender:nth-of-type(${bIndex + 1})`
+      ).style.top = `${customerPosition - originalBartenderPosition}px`;
+      document.querySelector(
+        `.bartender:nth-of-type(${bIndex + 1})`
+      ).style.left = "20px"; // temp solution, so that PMJ won't cover up order nr
     }
   }
 }

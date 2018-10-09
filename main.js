@@ -7,6 +7,7 @@ const bartenderSection = document.querySelector("section.bartenders");
 let taps;
 let beers;
 let totalAmount;
+let bartenderS;
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
@@ -50,15 +51,16 @@ function init() {
   // bartender section, same grid as above so they all line up
   bartenderSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   // generate bartenders
-  let bartenderS = data.bartenders;
+  bartenderS = data.bartenders;
   bartenderS.forEach(generateBartender);
   function generateBartender(b, bIndex) {
     let bartender = document.createElement("div");
-    bartender.className = "bartender";
-    bartender.setAttribute("onTap", b.usingTap + 1);
-    bartender.setAttribute("servingCustomer", b.servingCustomer);
+    bartender.className = "bartender hide";
+    bartender.setAttribute("data-name", b.name);
+    bartender.setAttribute("data-onTap", b.usingTap + 1);
+    bartender.setAttribute("data-servingCustomer", b.servingCustomer);
     if (b.statusDetail) {
-      bartender.setAttribute("work", b.statusDetail);
+      bartender.setAttribute("data-work", b.statusDetail);
     }
     bartender.textContent = b.name[0];
     bartenderSection.appendChild(bartender);
@@ -219,37 +221,43 @@ function update() {
   }
 
   // position bartender
-  document.querySelectorAll(".bartenders>div");
-  //   // get each bartenders tap position
-  //   if (b.usingTap) {
-  //     let onTapNr = b.usingTap + 1;
-  //     let servingCustomerNr = b.servingCustomer;
-  //     // document
-  //     //   .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
-  //     //   .classList.remove("hide");
-  //     document.querySelector(
-  //       `.bartender:nth-of-type(${bIndex + 1})`
-  //     ).style.gridColumnStart = onTapNr;
-  //     document.querySelector(
-  //       `.bartender:nth-of-type(${bIndex + 1})`
-  //     ).style.gridRowStart = "1";
-  //     console.log(
-  //       b.name + " on tap " + onTapNr + " serving customer " + servingCustomerNr
-  //     );
-  //     let customerPosition = document
-  //       .querySelector("[data-ordernr='" + servingCustomerNr + "']")
-  //       .getBoundingClientRect().top;
-  //     let originalBartenderPosition = document
-  //       .querySelector(`.bartender:nth-of-type(${bIndex + 1})`)
-  //       .getBoundingClientRect().top;
-  //     document.querySelector(
-  //       `.bartender:nth-of-type(${bIndex + 1})`
-  //     ).style.top = `${customerPosition - originalBartenderPosition}px`;
-  //     document.querySelector(
-  //       `.bartender:nth-of-type(${bIndex + 1})`
-  //     ).style.left = "20px"; // temp solution, so that PMJ won't cover up order nr
-  //   }
-  // }
-
+  bartenderS = data.bartenders;
+  bartenderS.forEach(updateBartender);
+  function updateBartender(b) {
+    let bartenderName = b.name;
+    document
+      .querySelector(`[data-name='${bartenderName}']`)
+      .setAttribute("data-onTap", b.usingTap);
+    document
+      .querySelector(`[data-name='${bartenderName}']`)
+      .setAttribute("data-servingCustomer", b.servingCustomer);
+    if (b.statusDetail === "pourBeer") {
+      document
+        .querySelector(`[data-name='${bartenderName}']`)
+        .classList.remove("hide");
+      // put bartender in the column where the tap is used
+      document.querySelector(
+        `[data-name='${bartenderName}']`
+      ).style.gridColumnStart = b.usingTap + 1;
+      console.log(b.name + b.usingTap);
+      // put bartender on the row of of the customer he's serving
+      // let customerPosition = document
+      //   .querySelector("[data-ordernr='" + b.servingCustomer + "']")
+      //   .getBoundingClientRect().top;
+      // let originalBartenderPosition = document
+      //   .querySelector(`[data-name='${bartenderName}']`)
+      //   .getBoundingClientRect().top;
+      // console.log(originalBartenderPosition);
+      // document.querySelector(
+      //   `[data-name='${bartenderName}']`
+      // ).style.top = `${customerPosition - originalBartenderPosition}px`;
+      // document.querySelector(`[data-name='${bartenderName}']`).style.left =
+      //   "20px";
+    } else {
+      document
+        .querySelector(`[data-name='${bartenderName}']`)
+        .classList.add("hide");
+    }
+  }
   setTimeout(update, 1000);
 }

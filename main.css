@@ -65,9 +65,14 @@ section.bartenders {
 .imgKegs {
   height: auto;
   position: fixed;
-  top: 0;
+  top: 10vh;
   left: 130px;
 }
 .imgKegs img {
   width: 100%;
+}
+main {
+  background-color: #333333;
+  padding: 10vh 0;
+  min-height: 100vh;
 }

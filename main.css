@@ -110,7 +110,16 @@ aside li {
   font-size: 19px;
   font-weight: bold;
   color: #333333;
+  cursor: pointer;
 }
 .categories {
   text-align: right;
+}
+.found {
+  animation: found ease-in 0.3s;
+}
+@keyframes found {
+  50% {
+    transform: scale(1.1);
+  }
 }

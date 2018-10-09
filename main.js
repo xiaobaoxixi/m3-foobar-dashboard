@@ -24,13 +24,30 @@ function init() {
       beerCategoris.push(b.category);
     }
   }
-  console.log(beerCategoris);
   beerCategoris.forEach(addTag);
   function addTag(bC) {
     let cate = document.createElement("li");
     cate.textContent = bC;
     categories.appendChild(cate);
   }
+  const cateS = document.querySelectorAll(".categories li");
+  cateS.forEach(c => {
+    c.addEventListener("click", function(m) {
+      let cate = m.target.textContent;
+      if (document.querySelector(`[data-cate='${cate}']`)) {
+        document.querySelectorAll(`[data-cate='${cate}']`).forEach(a => {
+          a.classList.add("found");
+          setTimeout(function() {
+            a.classList.remove("found");
+          }, 300);
+        });
+        m.target.style.textDecoration = "underline";
+      } else {
+        m.target.style.color = "lightgrey";
+      }
+    });
+  });
+
   taps = data.taps;
   fetch("beerinfo.json")
     .then(data => data.json())
@@ -60,7 +77,7 @@ function buildStructure(data) {
     beerData.forEach(findMatch);
     function findMatch(b, bi) {
       if (t.beer === b.name) {
-        eachTap.setAttribute("date-cate", b.category);
+        eachTap.setAttribute("data-cate", b.category);
         // glassSection.querySelector(
         //   `div:nth-of-type(${index + 1})`
         // ).style.backgroundImage = `url('${b.category.toLowerCase()}.png')`;

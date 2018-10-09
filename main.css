@@ -5,10 +5,6 @@
   position: relative;
   font-family: sans-serif;
 }
-section.storages {
-  display: grid;
-  grid-gap: 0;
-}
 section.beers {
   height: 300px; /* need to finalise based on svg */
   padding: 0 50px;
@@ -36,7 +32,9 @@ section.beers {
   }
 }
 section.customers,
-section.customers > div {
+section.customers > div,
+section.glasses,
+section.storages {
   display: grid;
   grid-gap: 0;
 }
@@ -44,7 +42,8 @@ section.customers > div > * {
   border-bottom: 1px solid black;
 }
 section.customers,
-section.bartenders {
+section.bartenders,
+section.glasses {
   padding: 0 50px;
 }
 section.bartenders {
@@ -89,4 +88,7 @@ h1 {
 }
 section.glasses {
   height: 100px;
+}
+section.glasses > div {
+  height: 100%;
 }

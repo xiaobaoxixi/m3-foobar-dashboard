@@ -1,6 +1,7 @@
 "use strict";
 
 const beerSection = document.querySelector("section.beers");
+const glassSection = document.querySelector("section.glasses");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");
@@ -36,12 +37,16 @@ function buildStructure(data) {
     let beerHeading = document.createElement("h1");
     beerHeading.textContent = t.beer;
     eachTap.appendChild(beerHeading);
+    let eachGlass = document.createElement("div");
+    glassSection.appendChild(eachGlass);
     // get matching color of each beer
     beerData.forEach(findMatch);
     function findMatch(b, bi) {
       if (t.beer === b.name) {
-        console.log(t.beer);
         eachTap.setAttribute("date-cate", b.category);
+        // glassSection.querySelector(
+        //   `div:nth-of-type(${index + 1})`
+        // ).style.backgroundImage = `url('${b.category.toLowerCase()}.png')`;
       }
     }
     // get matching glass of each beer based on category
@@ -62,7 +67,7 @@ function buildStructure(data) {
   // put the 2 types of beers above together and define dynamic grid
   totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
-
+  glassSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   imgKegs.style.width = ((window.innerWidth - 100) * 7) / totalAmount + "px"; // 100(px) is the padding on the sides
   beerSection.style.height =
     (((window.innerWidth - 100) * 7) / totalAmount / 1440) * 463 + "px";

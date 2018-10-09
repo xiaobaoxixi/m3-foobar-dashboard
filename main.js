@@ -6,16 +6,22 @@ const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");
 let taps;
 let beers;
+let beerData = [];
 let totalAmount;
 let bartenderS;
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
-  console.log(data.taps);
-  //  console.table(data.bartenders);
-  //  console.table(data.serving);
   beers = data.beertypes;
   taps = data.taps;
+  fetch("beerinfo.json")
+    .then(data => data.json())
+    .then(jsonData => {
+      beerData = jsonData;
+      buildStructure(data);
+    });
+}
+function buildStructure(data) {
   // build bar overview based on which beers are on tap, plus the ones that are left
   // it's possible that the same beer is on more than 1 tap, so total amount of kegs is not always 10, rather the 7 taps plus the number of beers that are left
   // build element of the 7 taps, regardless if there is any duplication
@@ -30,9 +36,16 @@ function init() {
     let beerHeading = document.createElement("h1");
     beerHeading.textContent = t.beer;
     eachTap.appendChild(beerHeading);
-    beerSection.appendChild(eachTap);
     // get matching color of each beer
-    // get matching glass of each beer
+    beerData.forEach(findMatch);
+    function findMatch(b, bi) {
+      if (t.beer === b.name) {
+        console.log(t.beer);
+        eachTap.setAttribute("date-cate", b.category);
+      }
+    }
+    // get matching glass of each beer based on category
+    beerSection.appendChild(eachTap);
   }
   // find and build element of beers that are NOT on keg
   let beersOnKeg = [];

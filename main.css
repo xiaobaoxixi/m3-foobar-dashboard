@@ -133,10 +133,19 @@ aside li {
   right: 0;
   top: 12vh;
   padding: 40px;
+  transition: all 0.1s ease-in-out;
+}
+#statistic * {
   transition: all 0.3s ease-in-out;
 }
 #statistic.close {
-  right: -25%;
+  right: -23%;
+}
+#statistic.close * {
+  opacity: 0;
+}
+#statistic.close p.close {
+  opacity: 1;
 }
 p.close {
   font-size: 2em;

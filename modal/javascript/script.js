@@ -8,6 +8,7 @@ let currentBeer;
 let hops = document.querySelector(".hops");
 let malt = document.querySelector(".malts");
 let ester = document.querySelector(".ester");
+let glass = document.querySelector(".glass");
 let timeline = document.querySelector(".timeline");
 let mouthfeel = document.querySelector(".mouthfeel");
 let mainBeerDiv = document.querySelector(".mainBeerDiv");
@@ -30,8 +31,7 @@ fetch("javascript/beerinfo.json")
     console.log(beerData);
     let beerTypes = Array.from(data.beertypes);
     currentBeer = beerTypes[beerIndexPassed];
-    showBeers(currentBeer);
-    console.log(currentBeer);
+    showBeers();
 
     //createing div with all beers
     for (let i = 0; i < beerTypes.length; i++) {
@@ -51,11 +51,13 @@ fetch("javascript/beerinfo.json")
       });
     }
 
-    function showBeers(singleBeer) {
-      //  console.log("singlebeer is", singleBeer);
+    function showBeers() {
       for (let i = 0; i < beerData.length; i++) {
         if (currentBeer.name === beerData[i].name) {
           console.log(beerData[i]);
+          console.log(currentBeer);
+          beerImg.setAttribute("src", `imgs/beerlogos/${currentBeer.label}`);
+          beerTitle.textContent = currentBeer.name;
           buildBeer(beerData[i]);
           buildBars(hops, beerData[i].hoplevel);
           buildBars(malt, beerData[i].maltlevel);

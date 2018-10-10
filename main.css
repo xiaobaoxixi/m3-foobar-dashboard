@@ -156,11 +156,20 @@ p.close {
 #statistic > div {
   margin: 20px 0;
 }
-#statistic > div p:first-of-type {
+#statistic > div p:first-of-type:not(.barLegend) {
   text-decoration: underline;
   line-height: 36px;
 }
 .bold {
   font-weight: bolder;
   font-size: 2em;
+}
+.bar {
+  height: 10px;
+  background-color: #333333;
+  margin-bottom: 5px;
+}
+.barLegend {
+  text-decoration: none;
+  font-size: 0.9em;
 }

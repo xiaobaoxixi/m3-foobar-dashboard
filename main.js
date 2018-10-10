@@ -84,9 +84,9 @@ function buildStructure(data) {
       if (t.beer === b.name) {
         eachTap.setAttribute("data-cate", b.category);
         eachTap.style.backgroundColor = `${b.appearancetwo}`;
-        // glassSection.querySelector(
-        //   `div:nth-of-type(${index + 1})`
-        // ).style.backgroundImage = `url('${b.category.toLowerCase()}.png')`;
+        glassSection.querySelector(
+          `div:nth-of-type(${index + 1})`
+        ).style.backgroundImage = `url('img/${b.glassImage}')`;
       }
     }
     // get matching glass of each beer based on category

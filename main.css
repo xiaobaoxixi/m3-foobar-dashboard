@@ -91,10 +91,15 @@ h1 {
 }
 section.glasses {
   height: 100px;
+  margin-top: 50px;
 }
 section.glasses > div {
   height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 70% bottom;
 }
+
 aside {
   height: 12vh;
   width: 100%;

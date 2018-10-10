@@ -23,7 +23,10 @@ function toggleStatistic() {
 
 // open and close modal
 const modal = document.querySelector(".modal");
-function openModal() {
+const iframe = document.querySelector("iframe");
+function openModal(beerClicked) {
+  iframe.setAttribute("src", `modal/beer-profile.html?index=${beerClicked}`);
+  console.log(beerClicked);
   modal.classList.add("show");
 }
 const closeModalX = document.querySelector("p.close-modal");

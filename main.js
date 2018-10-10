@@ -75,6 +75,12 @@ function buildStructure(data) {
     eachTap.className = "beer";
     eachTap.setAttribute("data-beername", t.beer);
     eachTap.setAttribute("data-tapindex", index);
+    data.beertypes.forEach((b, i) => {
+      if (b.name === t.beer) {
+        eachTap.setAttribute("data-beerindex", i);
+      }
+    });
+
     let beerHeading = document.createElement("h1");
     beerHeading.textContent = t.beer;
     eachTap.appendChild(beerHeading);
@@ -156,7 +162,10 @@ function buildStructure(data) {
   const aliveKegs = document.querySelectorAll(".beer:not(not-on-tap)");
   aliveKegs.forEach(listenClick);
   function listenClick(ak) {
-    ak.addEventListener("click", openModal);
+    ak.addEventListener("click", function(m) {
+      let beerClicked = m.target.getAttribute("data-beerindex");
+      openModal(beerClicked);
+    });
   }
 
   update();

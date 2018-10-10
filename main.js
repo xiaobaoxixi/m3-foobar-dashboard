@@ -2,6 +2,7 @@
 
 const beerSection = document.querySelector("section.beers");
 const glassSection = document.querySelector("section.glasses");
+const labelSection = document.querySelector("section.labels");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");
@@ -76,20 +77,24 @@ function buildStructure(data) {
     let beerHeading = document.createElement("h1");
     beerHeading.textContent = t.beer;
     eachTap.appendChild(beerHeading);
+    // build glass section
     let eachGlass = document.createElement("div");
     glassSection.appendChild(eachGlass);
-    // get matching color of each beer
+    // build label section
+    let eachLabel = document.createElement("div");
+    labelSection.appendChild(eachLabel);
     beerData.forEach(findMatch);
     function findMatch(b, bi) {
       if (t.beer === b.name) {
         eachTap.setAttribute("data-cate", b.category);
+        // get matching color of each beer
         eachTap.style.backgroundColor = `${b.appearancetwo}`;
+        // get matching glass of each beer based on category
         glassSection.querySelector(
           `div:nth-of-type(${index + 1})`
         ).style.backgroundImage = `url('img/${b.glassImage}')`;
       }
     }
-    // get matching glass of each beer based on category
     beerSection.appendChild(eachTap);
   }
   // find and build element of beers that are NOT on keg
@@ -110,6 +115,7 @@ function buildStructure(data) {
   totalAmount = document.querySelectorAll(".beer").length;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   glassSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  labelSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   imgKegs.style.width = ((window.innerWidth - 100) * 7) / totalAmount + "px"; // 100(px) is the padding on the sides
   imgKegsOfftap.style.width =
     (((window.innerWidth - 100) * 7) / totalAmount / 7) * 9 + "px"; // offtap image has 9 kegs while imgKegs has 7

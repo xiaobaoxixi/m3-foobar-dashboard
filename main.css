@@ -291,3 +291,12 @@ iframe {
   color: #333333;
   font-size: 2em;
 }
+.lean {
+  animation: leanForward 0.5s ease-out forwards;
+  transform-origin: bottom right;
+}
+@keyframes leanForward {
+  to {
+    transform: skewX(10deg);
+  }
+}

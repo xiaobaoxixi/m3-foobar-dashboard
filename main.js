@@ -46,7 +46,6 @@ function init() {
   cateS.forEach(c => {
     c.addEventListener("click", function(m) {
       let cate = m.target.textContent;
-      console.log(cate);
       if (document.querySelector(`[data-cate='${cate}']`)) {
         document.querySelectorAll(`[data-cate='${cate}']`).forEach(a => {
           a.classList.add("found");
@@ -104,9 +103,15 @@ function buildStructure(data) {
     labelSection.appendChild(eachLabel);
     beers.forEach((b, i) => {
       if (b.name === t.beer) {
-        document.querySelector(
-          `.labels>div:nth-of-type(${index + 1})`
-        ).style.backgroundImage = `url('images/${beers[i].label}')`;
+        if (beers[i].label) {
+          document.querySelector(
+            `.labels>div:nth-of-type(${index + 1})`
+          ).style.backgroundImage = `url('images/${beers[i].label}')`;
+        } else {
+          document.querySelector(
+            `.labels>div:nth-of-type(${index + 1})`
+          ).style.backgroundImage = `url('materials/default-label.png')`;
+        }
       }
     });
     beerData.forEach(findMatch); // the beer color and glass type come from local JSON, not online
@@ -390,7 +395,18 @@ function update() {
     //     square.appendChild(portion);
     //   }
     // }
+
     if (b.statusDetail === "pourBeer") {
+      if (
+        document
+          .querySelector(`.labels>div:nth-of-type(${b.usingTap + 1})`)
+          .className.indexOf("lean") < 0
+      ) {
+        // lean tap
+        document.querySelector(
+          `.labels>div:nth-of-type(${b.usingTap + 1})`
+        ).className = "lean";
+      }
       document
         .querySelector(`[data-name='${bartenderName}']`)
         .classList.remove("hide");
@@ -413,17 +429,28 @@ function update() {
       document.querySelector(`[data-name='${bartenderName}']`).style.left =
         "70px";
     } else if (b.statusDetail === "releaseTap") {
+      // get the index of tap that's being released, which is releted to the bartender grid  colunm start
+      let releasedTap = document.querySelector(
+        `.bartenders [data-name=${b.name}]`
+      );
+      let gridStartStringIndex = releasedTap
+        .getAttribute("style")
+        .indexOf("start:");
+      let gridStart = document
+        .querySelector(`.bartenders [data-name=${b.name}]`)
+        .getAttribute("style")[`${gridStartStringIndex + 7}`]; // 7 is the length of "start: "
+      document.querySelector(
+        `.labels>div:nth-of-type(${gridStart})`
+      ).className = "";
+
       document
         .querySelector(`[data-name='${bartenderName}']`)
         .classList.add("hide");
-      console.log(bartenderS[i]);
       let sofar = bartenderServed[i];
       sofar++;
       bartenderServed[i] = sofar;
-      console.log(bartenderServed);
       const sum = (sumSofar, elem) => sumSofar + elem;
       let totalServed = bartenderServed.reduce(sum);
-      console.log(totalServed);
       square.innerHTML = "";
       for (let i = 0; i < bartenderServed.length; i++) {
         let portion = document.createElement("div");
@@ -455,7 +482,6 @@ function update() {
       //     " cN " +
       //     b.servingCustomer
       // );
-    } else if (!b.usingTap) {
     }
   }
   setTimeout(update, 1000);

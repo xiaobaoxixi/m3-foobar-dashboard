@@ -1,8 +1,9 @@
 "use strict";
 
 const beerSection = document.querySelector("section.beers");
-const glassSection = document.querySelector("section.glasses");
+const nozzleSection = document.querySelector("section.nozzles");
 const labelSection = document.querySelector("section.labels");
+const glassSection = document.querySelector("section.glasses");
 const customerSection = document.querySelector("section.customers");
 const bartenderSection = document.querySelector("section.bartenders");
 const imgKegs = document.querySelector(".imgKegs");

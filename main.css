@@ -70,7 +70,7 @@ section.bartenders {
 .imgKegs-offtap {
   height: auto;
   position: fixed;
-  top: 17vh;
+  top: 15vh;
   left: 50px;
   pointer-events: none;
 }
@@ -80,7 +80,7 @@ section.bartenders {
 }
 main {
   background-color: #333333;
-  padding: 17vh 0;
+  padding: 15vh 0;
   height: 100vh;
   overflow: hidden;
 }
@@ -94,7 +94,7 @@ h1 {
   transform: rotate(-90deg) translate(-1vw, -8.2vw);
 }
 section.glasses {
-  height: 100px;
+  height: 80px;
   margin-top: 10px;
 }
 section.glasses > div {
@@ -102,7 +102,7 @@ section.glasses > div {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
-  left: 20px;
+  left: 15px;
 }
 
 aside {
@@ -185,12 +185,13 @@ p.close {
   font-size: 0.9em;
 }
 .labels {
-  height: 100px;
+  height: 80px;
+  margin-top: 20px;
 }
 .labels div {
   border-radius: 50%;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
-  left: 20px;
+  left: 15px;
 }

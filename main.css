@@ -143,3 +143,14 @@ p.close {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+#statistic > div {
+  margin: 20px 0;
+}
+#statistic > div p:first-of-type {
+  text-decoration: underline;
+  line-height: 36px;
+}
+.bold {
+  font-weight: bolder;
+  font-size: 2em;
+}

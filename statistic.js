@@ -7,7 +7,7 @@ function popularBeer(totalCustomerCount, totalOrder) {
   let totalBeerCount = totalOrder.length;
   // calculate average order size
   let averageOrdersize = totalBeerCount / totalCustomerCount;
-  let averageOrdersizeCLeared = Math.floor(averageOrdersize * 1000) / 1000;
+  let averageOrdersizeCLeared = Math.floor(averageOrdersize * 10) / 10;
   average.innerHTML = `<span class="bold">${averageOrdersizeCLeared}</span> glass/customer`;
   // sort popularity of beers
   let eachBeerCountArray = [];
@@ -35,7 +35,6 @@ function popularBeer(totalCustomerCount, totalOrder) {
   let sorted = eachBeerCountArray.sort(function compare(a, b) {
     return b.percent - a.percent;
   });
-  console.log(sorted);
   bars.innerHTML = "";
   sorted.forEach(drawBar);
   function drawBar(s) {

@@ -20,6 +20,8 @@ let totalAmount;
 let bartenderS;
 let orderList = [];
 let allSell = [];
+let bartenderServed = [[], [], []];
+
 window.addEventListener("DOMContentLoaded", init);
 function init() {
   let data = JSON.parse(FooBar.getData());
@@ -348,7 +350,7 @@ function update() {
   // position bartender
   bartenderS = data.bartenders;
   bartenderS.forEach(updateBartender);
-  function updateBartender(b) {
+  function updateBartender(b, i) {
     let bartenderName = b.name;
     document
       .querySelector(`[data-name='${bartenderName}']`)
@@ -356,6 +358,19 @@ function update() {
     document
       .querySelector(`[data-name='${bartenderName}']`)
       .setAttribute("data-servingCustomer", b.servingCustomer);
+    if (
+      b.servingCustomer &&
+      bartenderServed[i].indexOf(b.servingCustomer) < 0
+    ) {
+      bartenderServed[i].push(b.servingCustomer);
+      let totalServed = 0;
+      for (let s of bartenderServed) {
+        totalServed += s.length;
+      }
+      console.log(totalServed);
+      bartenderServed[i].length;
+      console.log(bartenderServed, totalServed);
+    }
     if (b.statusDetail === "pourBeer") {
       document
         .querySelector(`[data-name='${bartenderName}']`)

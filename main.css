@@ -95,13 +95,14 @@ h1 {
 }
 section.glasses {
   height: 100px;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 section.glasses > div {
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 70% bottom;
+  background-position: center bottom;
+  left: 20px;
 }
 
 aside {
@@ -184,5 +185,12 @@ p.close {
   font-size: 0.9em;
 }
 .labels {
-  height: 50px;
+  height: 100px;
+}
+.labels div {
+  border-radius: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  left: 20px;
 }

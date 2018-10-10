@@ -83,7 +83,16 @@ function buildStructure(data) {
     // build label section
     let eachLabel = document.createElement("div");
     labelSection.appendChild(eachLabel);
-    beerData.forEach(findMatch);
+    beers.forEach((b, i) => {
+      if (b.name === t.beer) {
+        document.querySelector(
+          `.labels>div:nth-of-type(${index + 1})`
+        ).style.backgroundImage = `url('images/${beers[i].label}')`;
+        console.log(beers[i].label);
+      }
+    });
+    console.log(beers);
+    beerData.forEach(findMatch); // the beer color and glass type come from local JSON, not online
     function findMatch(b, bi) {
       if (t.beer === b.name) {
         eachTap.setAttribute("data-cate", b.category);

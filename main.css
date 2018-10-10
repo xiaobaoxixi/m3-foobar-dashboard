@@ -54,7 +54,7 @@ section.customers {
   padding-top: 30px;
   margin-top: 20px;
   background-color: rgb(235, 235, 235);
-  min-height: 190px;
+  min-height: 175px;
 }
 section.bartenders {
   background-color: rgb(235, 235, 235);
@@ -166,11 +166,19 @@ aside li {
   transition: all 0.1s ease-in-out;
   border-left: 5px solid white;
 }
+#statistic p.close,
+#statistic h2 {
+  display: inline-block;
+  left: -35px;
+}
+#statistic h2 {
+  margin-left: 10px;
+}
 #statistic * {
   transition: all 0.3s ease-in-out;
 }
 #statistic.close {
-  right: -20%;
+  right: -24%;
 }
 #statistic.close * {
   opacity: 0;
@@ -185,21 +193,21 @@ p.close {
   transition: all 0.3s ease-in-out;
 }
 #statistic > div {
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 #statistic > div p:first-of-type:not(.barLegend) {
   text-decoration: underline;
   font-weight: 500;
   color: #777;
-  margin: 30px 0 10px 0;
+  margin: 20px 0 10px 0;
 }
 .bold {
   font-weight: bolder;
   font-size: 2em;
 }
 .bar {
-  height: 13px;
-  background-color: #333333;
+  height: 10px;
+  background-color: brown;
   margin-bottom: 10px;
   transition: all 0.3s ease-in;
 }
@@ -234,7 +242,7 @@ p.close {
   left: 0;
   bottom: 0;
   color: #333333;
-  transform: rotate(-90deg) translate(30px, 25px);
+  transform: rotate(-90deg) translate(40px, 25px);
 }
 .modal {
   pointer-events: none;

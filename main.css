@@ -32,18 +32,19 @@ section.beers {
   }
 }
 section.customers,
-section.customers > div,
 section.glasses,
 section.storages,
 section.labels,
-section.nozzles {
+section.nozzles,
+section.bartenders {
   display: grid;
   grid-gap: 0;
   padding: 0 50px;
 }
 section.customers > div {
-  padding: 0;
+  display: grid;
   border-bottom: 1px dotted #333333;
+  left: 70px;
 }
 section.customers {
   margin-top: 50px;
@@ -53,9 +54,6 @@ section.customers {
   left: 75px; /* temp solution, not dynamic 
 } */
 
-section.bartenders {
-  display: grid;
-}
 .bartender {
   width: 30px;
   height: 30px;

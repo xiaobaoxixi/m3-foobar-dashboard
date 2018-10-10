@@ -349,8 +349,8 @@ function update() {
       document.querySelector(
         `[data-name='${bartenderName}']`
       ).style.top = `${customerPosition - originalBartenderPosition}px`;
-      // document.querySelector(`[data-name='${bartenderName}']`).style.left =
-      //   "30px";
+      document.querySelector(`[data-name='${bartenderName}']`).style.left =
+        "70px";
     } else if (b.statusDetail === "releaseTap") {
       document
         .querySelector(`[data-name='${bartenderName}']`)

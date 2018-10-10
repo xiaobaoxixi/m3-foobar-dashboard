@@ -53,6 +53,7 @@ section.customers {
   padding-top: 30px;
   margin-top: 20px;
   background-color: rgb(235, 235, 235);
+  min-height: 190px;
 }
 section.bartenders {
   background-color: rgb(235, 235, 235);

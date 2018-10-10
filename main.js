@@ -1,6 +1,7 @@
 "use strict";
 
 const beerSection = document.querySelector("section.beers");
+const storageSection = document.querySelector("section.storages");
 const nozzleSection = document.querySelector("section.nozzles");
 const labelSection = document.querySelector("section.labels");
 const glassSection = document.querySelector("section.glasses");
@@ -84,6 +85,9 @@ function buildStructure(data) {
     let beerHeading = document.createElement("h1");
     beerHeading.textContent = t.beer;
     eachTap.appendChild(beerHeading);
+    // build storage section
+    let eachStorage = document.createElement("div");
+    storageSection.appendChild(eachStorage);
     // build glass section
     let eachGlass = document.createElement("div");
     glassSection.appendChild(eachGlass);
@@ -130,6 +134,7 @@ function buildStructure(data) {
   }
   // put the 2 types of beers above together and define dynamic grid
   totalAmount = document.querySelectorAll(".beer").length;
+  storageSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   glassSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   labelSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
@@ -182,6 +187,12 @@ function update() {
     function checkMatch(s) {
       if (s.name === beerName) {
         b.setAttribute("data-storage", s.amount);
+        let storage = document.createElement("span");
+        storage.textContent = " *" + s.amount;
+        if (b.querySelector("span")) {
+          b.querySelector("span").remove();
+        }
+        b.querySelector("h1").appendChild(storage);
       }
     }
   }

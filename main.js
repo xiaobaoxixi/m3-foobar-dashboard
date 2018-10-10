@@ -152,6 +152,13 @@ function buildStructure(data) {
     bartender.textContent = b.name[0];
     bartenderSection.appendChild(bartender);
   }
+
+  const allKegs = document.querySelectorAll(".beer");
+  allKegs.forEach(listenClick);
+  function listenClick(ak) {
+    ak.addEventListener("click", openModal);
+  }
+
   update();
 }
 

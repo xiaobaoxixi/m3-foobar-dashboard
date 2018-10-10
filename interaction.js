@@ -20,3 +20,15 @@ function toggleStatistic() {
     closeX.textContent = "x";
   }
 }
+
+// open and close modal
+const modal = document.querySelector(".modal");
+function openModal() {
+  modal.classList.add("show");
+  console.log(allKegs);
+}
+const closeModalX = document.querySelector("p.close-modal");
+closeModalX.addEventListener("click", closeModal);
+function closeModal() {
+  modal.classList.remove("show");
+}

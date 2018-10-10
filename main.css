@@ -16,9 +16,11 @@ section.beers {
   background-color: darkgoldenrod;
   bottom: 0;
   transition: all 1s linear;
+  cursor: pointer;
 }
 .not-on-tap {
   opacity: 0.3;
+  cursor: initial;
 }
 .change-keg {
   animation: flash 1s infinite;
@@ -44,10 +46,15 @@ section.bartenders {
 section.customers > div {
   display: grid;
   border-bottom: 1px dotted #333333;
+  padding-top: 5px;
   left: 70px;
 }
 section.customers {
-  margin-top: 50px;
+  padding-top: 30px;
+  margin-top: 20px;
+  background-color: rgb(235, 235, 235);
+}
+section.bartenders {
   background-color: rgb(235, 235, 235);
 }
 /* section.customers > div > * {
@@ -58,11 +65,15 @@ section.customers {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid black;
+  padding-top: 4px;
+  border: 2px solid #333333;
   grid-row-start: 1;
 }
+.bartender p {
+  text-align: center;
+}
 .serving {
-  color: red;
+  color: #aaaaaa;
 }
 .hide {
   display: none;
@@ -144,13 +155,13 @@ aside li {
   color: #333333;
   width: 29%;
   height: 91vh;
-  background: rgba(235, 235, 235, 0.9);
+  background: rgba(235, 235, 235, 0.95);
   position: fixed;
   right: 0;
   top: 9vh;
   padding: 20px 4%;
   transition: all 0.1s ease-in-out;
-  border-left: 3px solid black;
+  border-left: 5px solid white;
 }
 #statistic * {
   transition: all 0.3s ease-in-out;
@@ -242,11 +253,11 @@ iframe {
 }
 .show iframe {
   opacity: 1;
-  height: 90vh;
+  height: 91vh;
   width: 120vh;
-  background-color: yellow;
+  overflow: hidden;
   position: absolute;
   left: 10vw;
-  top: 0.5vh;
+  top: 0;
   left: calc(50vw - 60vh);
 }

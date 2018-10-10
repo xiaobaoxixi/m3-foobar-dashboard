@@ -32,7 +32,7 @@ function showBeers(singleBeer) {
       buildBars(malt, beerData[i].maltlevel);
       buildBars(ester, beerData[i].esterlevel);
       buildBars(mouthfeel, beerData[i].mouthfeel);
-      buildTimeline(i);
+      buildTimeline(beerData[i]);
     }
   }
 }
@@ -115,11 +115,12 @@ function buildBeer(b) {
   }
   if (b.carbonation[0] >= 1) {
     for (let i = 0; i < b.carbonation[0]; i++) {
-      makeCarbonation(i);
+      // makeCarbonation(i);
     }
   }
 }
 function makeCarbonation(i) {
+  // document.querySelectorAll(".carbonation").remove();
   let carbonationImg = document.createElement("img");
   carbonationImg.setAttribute("src", "img/carbonation.png");
   carbonationImg.classList.add("carbonation");
@@ -154,6 +155,7 @@ function buildTimeline(b) {
   timeline.classList.remove("hidden");
   timeline.previousElementSibling.classList.remove("hidden");
   if (b.timeline) {
+    console.log("here!");
     timeline.children[0].textContent = b.timeline[0];
     timeline.children[4].textContent = b.timeline[1];
   } else {

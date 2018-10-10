@@ -149,12 +149,12 @@ function buildStructure(data) {
     if (b.statusDetail) {
       bartender.setAttribute("data-work", b.statusDetail);
     }
-    bartender.textContent = b.name[0];
+    bartender.innerHTML = `<p>${b.name[0]}</p>`;
     bartenderSection.appendChild(bartender);
   }
 
-  const allKegs = document.querySelectorAll(".beer");
-  allKegs.forEach(listenClick);
+  const aliveKegs = document.querySelectorAll(".beer:not(not-on-tap)");
+  aliveKegs.forEach(listenClick);
   function listenClick(ak) {
     ak.addEventListener("click", openModal);
   }

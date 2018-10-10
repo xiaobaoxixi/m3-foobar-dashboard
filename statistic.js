@@ -39,13 +39,15 @@ function popularBeer(totalCustomerCount, totalOrder) {
   bars.innerHTML = "";
   sorted.forEach(drawBar);
   function drawBar(s) {
-    let n = document.createElement("p");
-    n.className = "barLegend";
-    n.textContent = s.name;
-    let bar = document.createElement("div");
-    bar.className = "bar";
-    bar.style.width = `${s.percent * 100}%`;
-    bars.appendChild(n);
-    bars.appendChild(bar);
+    if (s.percent !== 0) {
+      let n = document.createElement("p");
+      n.className = "barLegend";
+      n.textContent = s.name;
+      let bar = document.createElement("div");
+      bar.className = "bar";
+      bar.style.width = `${s.percent * 100}%`;
+      bars.appendChild(n);
+      bars.appendChild(bar);
+    }
   }
 }

@@ -81,6 +81,9 @@ function buildStructure(data) {
     // build glass section
     let eachGlass = document.createElement("div");
     glassSection.appendChild(eachGlass);
+    // build nozzle section
+    let eachNozzle = document.createElement("div");
+    nozzleSection.appendChild(eachNozzle);
     // build label section
     let eachLabel = document.createElement("div");
     labelSection.appendChild(eachLabel);
@@ -89,10 +92,8 @@ function buildStructure(data) {
         document.querySelector(
           `.labels>div:nth-of-type(${index + 1})`
         ).style.backgroundImage = `url('images/${beers[i].label}')`;
-        console.log(beers[i].label);
       }
     });
-    console.log(beers);
     beerData.forEach(findMatch); // the beer color and glass type come from local JSON, not online
     function findMatch(b, bi) {
       if (t.beer === b.name) {
@@ -126,6 +127,7 @@ function buildStructure(data) {
   beerSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   glassSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   labelSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
+  nozzleSection.style.gridTemplateColumns = `repeat(${totalAmount}, 1fr)`;
   imgKegs.style.width = ((window.innerWidth - 100) * 7) / totalAmount + "px"; // 100(px) is the padding on the sides
   imgKegsOfftap.style.width =
     (((window.innerWidth - 100) * 7) / totalAmount / 7) * 9 + "px"; // offtap image has 9 kegs while imgKegs has 7

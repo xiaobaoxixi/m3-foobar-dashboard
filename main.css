@@ -35,7 +35,8 @@ section.customers,
 section.customers > div,
 section.glasses,
 section.storages,
-section.labels {
+section.labels,
+section.nozzles {
   display: grid;
   grid-gap: 0;
   padding: 0 50px;
@@ -95,7 +96,6 @@ h1 {
 }
 section.glasses {
   height: 80px;
-  margin-top: 10px;
 }
 section.glasses > div {
   height: 100%;
@@ -186,7 +186,7 @@ p.close {
 }
 .labels {
   height: 80px;
-  margin-top: 20px;
+  top: -15px;
 }
 .labels div {
   border-radius: 50%;
@@ -194,4 +194,15 @@ p.close {
   background-repeat: no-repeat;
   background-position: center bottom;
   left: 15px;
+}
+.nozzles {
+  height: 70px;
+  top: -25px;
+}
+.nozzles > div {
+  background-image: url("materials/nozzle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  left: 30px;
 }

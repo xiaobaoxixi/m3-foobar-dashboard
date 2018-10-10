@@ -22,7 +22,8 @@ let totalAmount;
 let bartenderS;
 let orderList = [];
 let allSell = [];
-let bartenderServed = [[], [], []];
+let bartenderServed = [0, 0, 0];
+//let bartenderServed = [[], [], []]; // if use served customer count as base for work load calculation, then use 3[]
 
 window.addEventListener("DOMContentLoaded", init);
 function init() {
@@ -365,31 +366,30 @@ function update() {
     document
       .querySelector(`[data-name='${bartenderName}']`)
       .setAttribute("data-servingCustomer", b.servingCustomer);
-    if (
-      b.servingCustomer &&
-      bartenderServed[i].indexOf(b.servingCustomer) < 0
-    ) {
-      bartenderServed[i].push(b.servingCustomer);
-      let totalServed = 0;
-      for (let s of bartenderServed) {
-        totalServed += s.length;
-      }
-      console.log(totalServed + "  " + bartenderServed[i].length);
-      console.log(bartenderServed, totalServed);
-      square.innerHTML = "";
-      for (let i = 0; i < bartenderServed.length; i++) {
-        let portion = document.createElement("div");
-        portion.style.height = `${(bartenderServed[i].length / totalServed) *
-          100}%`;
-        let name = document.querySelector("p");
-        name.className = "each-portion";
-        name.textContent = document.querySelector(
-          `[data-bartenderindex='${i}']`
-        ).textContent;
-        portion.appendChild(name);
-        square.appendChild(portion);
-      }
-    }
+    // if (
+    //   b.servingCustomer &&
+    //   bartenderServed[i].indexOf(b.servingCustomer) < 0
+    // ) {
+    //   bartenderServed[i].push(b.servingCustomer);
+    //   let totalServed = 0;
+    //   for (let s of bartenderServed) {
+    //     totalServed += s.length;
+    //   }
+    //   console.log(bartenderServed, totalServed);
+    //   square.innerHTML = "";
+    //   for (let i = 0; i < bartenderServed.length; i++) {
+    //     let portion = document.createElement("div");
+    //     portion.style.height = `${(bartenderServed[i].length / totalServed) *
+    //       100}%`;
+    //     let name = document.querySelector("p");
+    //     name.className = "each-portion";
+    //     name.textContent = document.querySelector(
+    //       `[data-bartenderindex='${i}']`
+    //     ).textContent;
+    //     portion.appendChild(name);
+    //     square.appendChild(portion);
+    //   }
+    // }
     if (b.statusDetail === "pourBeer") {
       document
         .querySelector(`[data-name='${bartenderName}']`)
@@ -416,7 +416,26 @@ function update() {
       document
         .querySelector(`[data-name='${bartenderName}']`)
         .classList.add("hide");
-
+      console.log(bartenderS[i]);
+      let sofar = bartenderServed[i];
+      sofar++;
+      bartenderServed[i] = sofar;
+      console.log(bartenderServed);
+      const sum = (sumSofar, elem) => sumSofar + elem;
+      let totalServed = bartenderServed.reduce(sum);
+      console.log(totalServed);
+      square.innerHTML = "";
+      for (let i = 0; i < bartenderServed.length; i++) {
+        let portion = document.createElement("div");
+        portion.style.height = `${(bartenderServed[i] / totalServed) * 100}%`;
+        let name = document.querySelector("p");
+        name.className = "each-portion";
+        name.textContent = document.querySelector(
+          `[data-bartenderindex='${i}']`
+        ).textContent;
+        portion.appendChild(name);
+        square.appendChild(portion);
+      }
       let finishedBeer = document.querySelector(
         `[data-ordernr='${b.servingCustomer}'] p:nth-of-type(${
           document.querySelector(`[data-name='${bartenderName}']`).style

@@ -99,6 +99,9 @@ function buildStructure(data) {
       let eachNotOnTap = document.createElement("div");
       eachNotOnTap.className = "beer not-on-tap";
       eachNotOnTap.setAttribute("data-beername", beerName);
+      let beerHeading = document.createElement("h1");
+      beerHeading.textContent = beerName;
+      eachNotOnTap.appendChild(beerHeading);
       beerSection.appendChild(eachNotOnTap);
     }
   }

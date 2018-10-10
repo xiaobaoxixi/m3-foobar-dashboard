@@ -159,7 +159,7 @@ function buildStructure(data) {
     bartenderSection.appendChild(bartender);
   }
 
-  const aliveKegs = document.querySelectorAll(".beer:not(not-on-tap)");
+  const aliveKegs = document.querySelectorAll(".beer:not(.not-on-tap)");
   aliveKegs.forEach(listenClick);
   function listenClick(ak) {
     ak.addEventListener("click", function(m) {

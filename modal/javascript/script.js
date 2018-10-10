@@ -54,8 +54,6 @@ fetch("javascript/beerinfo.json")
     function showBeers() {
       for (let i = 0; i < beerData.length; i++) {
         if (currentBeer.name === beerData[i].name) {
-          console.log(beerData[i]);
-          console.log(currentBeer);
           beerImg.setAttribute("src", `imgs/beerlogos/${currentBeer.label}`);
           beerTitle.textContent = currentBeer.name;
           buildBeer(beerData[i]);

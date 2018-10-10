@@ -12,6 +12,7 @@ let beerCategoris = [];
 let taps;
 let beers;
 let beerData = [];
+let beersOntap = [];
 let totalAmount;
 let bartenderS;
 let orderList = [];
@@ -91,11 +92,10 @@ function buildStructure(data) {
     beerSection.appendChild(eachTap);
   }
   // find and build element of beers that are NOT on keg
-  let beersOnKeg = [];
-  taps.forEach(t => beersOnKeg.push(t.beer));
+  taps.forEach(t => beersOntap.push(t.beer));
   for (let i = 0; i < beers.length; i++) {
     let beerName = beers[i].name;
-    if (beersOnKeg.indexOf(beerName) < 0) {
+    if (beersOntap.indexOf(beerName) < 0) {
       let eachNotOnTap = document.createElement("div");
       eachNotOnTap.className = "beer not-on-tap";
       eachNotOnTap.setAttribute("data-beername", beerName);
@@ -292,7 +292,7 @@ function update() {
         order: ordersString
       });
     });
-    console.log(orderList);
+    //    console.log(orderList);
     allSell = [];
     orderList.forEach(oL => allSell.push(oL.order));
     let totalOrder = allSell.join().split(",");

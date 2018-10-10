@@ -47,12 +47,14 @@ section.customers > div {
 
 section.customers {
   margin-top: 50px;
+  background-color: rgb(235, 235, 235);
 }
 section.customers > div > * {
-  border-bottom: 3px dotted rgba(255, 255, 255, 0.7);
+  border-bottom: 3px dotted #333333;
 }
 section.bartenders {
   display: grid;
+  background-color: rgb(235, 235, 235);
 }
 .bartender {
   width: 30px;
@@ -70,7 +72,7 @@ section.bartenders {
 .imgKegs,
 .imgKegs-offtap {
   height: auto;
-  position: fixed;
+  position: absolute;
   top: 15vh;
   left: 50px;
   pointer-events: none;
@@ -83,10 +85,14 @@ main {
   background-color: #333333;
   padding: 15vh 0;
   height: 100vh;
-  overflow: hidden;
 }
 h1 {
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 3em;
+  color: #333333;
+  position: absolute;
+}
+section h1 {
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1.7vw;
   position: absolute;
   right: 0;
@@ -96,6 +102,7 @@ h1 {
 }
 section.glasses {
   height: 80px;
+  left: 5px;
 }
 section.glasses > div {
   height: 100%;
@@ -106,12 +113,12 @@ section.glasses > div {
 }
 
 aside {
-  height: 12vh;
+  height: 9vh;
   width: 100%;
   position: fixed;
   top: 0;
-  background: rgba(255, 255, 255, 0.9);
-  padding-top: 10px;
+  background: rgb(235, 235, 235);
+  padding-top: 20px;
   padding-left: 50px;
 }
 aside li {
@@ -136,14 +143,15 @@ aside li {
 }
 #statistic {
   color: #333333;
-  width: 30%;
-  height: 88vh;
-  background: rgba(255, 255, 255, 0.8);
-  position: absolute;
+  width: 33%;
+  height: 91vh;
+  background: rgba(235, 235, 235, 0.9);
+  position: fixed;
   right: 0;
-  top: 12vh;
-  padding: 40px;
+  top: 9vh;
+  padding: 20px;
   transition: all 0.1s ease-in-out;
+  border-left: 3px solid black;
 }
 #statistic * {
   transition: all 0.3s ease-in-out;
@@ -168,16 +176,18 @@ p.close {
 }
 #statistic > div p:first-of-type:not(.barLegend) {
   text-decoration: underline;
-  line-height: 36px;
+  font-weight: 500;
+  color: #777;
+  margin: 30px 0 10px 0;
 }
 .bold {
   font-weight: bolder;
   font-size: 2em;
 }
 .bar {
-  height: 10px;
+  height: 13px;
   background-color: #333333;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   transition: all 0.3s ease-in;
 }
 .barLegend {
@@ -186,7 +196,7 @@ p.close {
 }
 .labels {
   height: 80px;
-  top: -15px;
+  top: -10px;
 }
 .labels div {
   border-radius: 50%;
@@ -197,7 +207,7 @@ p.close {
 }
 .nozzles {
   height: 70px;
-  top: -25px;
+  top: -5px;
 }
 .nozzles > div {
   background-image: url("materials/nozzle.png");

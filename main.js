@@ -11,6 +11,8 @@ const imgKegs = document.querySelector(".imgKegs");
 const imgKegsOfftap = document.querySelector(".imgKegs-offtap");
 const tags = document.querySelector(".tags");
 const categories = document.querySelector(".categories");
+const workLoadStat = document.querySelector(".work-hard");
+const square = document.querySelector(".square");
 let beerCategoris = [];
 let taps;
 let beers;
@@ -164,6 +166,11 @@ function buildStructure(data) {
     }
     bartender.innerHTML = `<p>${b.name[0]}</p>`;
     bartenderSection.appendChild(bartender);
+    let bartenderLegend = document.createElement("p");
+    bartenderLegend.className = "hide"; // no need to display, just store the data
+    bartenderLegend.setAttribute("data-bartenderIndex", bIndex);
+    bartenderLegend.textContent = b.name;
+    workLoadStat.appendChild(bartenderLegend);
   }
 
   const aliveKegs = document.querySelectorAll(".beer:not(.not-on-tap)");
@@ -367,9 +374,21 @@ function update() {
       for (let s of bartenderServed) {
         totalServed += s.length;
       }
-      console.log(totalServed);
-      bartenderServed[i].length;
+      console.log(totalServed + "  " + bartenderServed[i].length);
       console.log(bartenderServed, totalServed);
+      square.innerHTML = "";
+      for (let i = 0; i < bartenderServed.length; i++) {
+        let portion = document.createElement("div");
+        portion.style.height = `${(bartenderServed[i].length / totalServed) *
+          100}%`;
+        let name = document.querySelector("p");
+        name.className = "each-portion";
+        name.textContent = document.querySelector(
+          `[data-bartenderindex='${i}']`
+        ).textContent;
+        portion.appendChild(name);
+        square.appendChild(portion);
+      }
     }
     if (b.statusDetail === "pourBeer") {
       document

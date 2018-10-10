@@ -81,7 +81,7 @@ main {
   overflow: hidden;
 }
 h1 {
-  color: #333333;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 1.7vw;
   position: absolute;
   right: 0;
@@ -128,7 +128,7 @@ aside li {
   color: #333333;
   width: 30%;
   height: 88vh;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   position: absolute;
   right: 0;
   top: 12vh;
@@ -154,7 +154,7 @@ p.close {
   transition: all 0.3s ease-in-out;
 }
 #statistic > div {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 #statistic > div p:first-of-type:not(.barLegend) {
   text-decoration: underline;
@@ -168,6 +168,7 @@ p.close {
   height: 10px;
   background-color: #333333;
   margin-bottom: 5px;
+  transition: all 0.3s ease-in;
 }
 .barLegend {
   text-decoration: none;

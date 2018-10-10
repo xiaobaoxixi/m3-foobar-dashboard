@@ -83,6 +83,7 @@ function buildStructure(data) {
     function findMatch(b, bi) {
       if (t.beer === b.name) {
         eachTap.setAttribute("data-cate", b.category);
+        eachTap.style.backgroundColor = `${b.appearancetwo}`;
         // glassSection.querySelector(
         //   `div:nth-of-type(${index + 1})`
         // ).style.backgroundImage = `url('${b.category.toLowerCase()}.png')`;

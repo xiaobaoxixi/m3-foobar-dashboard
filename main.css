@@ -68,6 +68,7 @@ section.bartenders {
   position: fixed;
   top: 17vh;
   left: 50px;
+  pointer-events: none;
 }
 .imgKegs img,
 .imgKegs-offtap img {

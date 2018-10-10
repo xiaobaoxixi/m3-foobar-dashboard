@@ -292,7 +292,9 @@ function update() {
     console.log(orderList);
     allSell = [];
     orderList.forEach(oL => allSell.push(oL.order));
-    console.log(allSell.join());
+    let totalOrder = allSell.join().split(",");
+    let totalCustomerCount = allSell.length;
+    popularBeer(totalCustomerCount, totalOrder);
   }
   // position bartender
   bartenderS = data.bartenders;

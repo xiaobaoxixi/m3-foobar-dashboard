@@ -80,8 +80,8 @@ main {
   overflow: hidden;
 }
 h1 {
-  font-size: 1.7vw;
   color: #333333;
+  font-size: 1.7vw;
   position: absolute;
   right: 0;
   text-align: right;
@@ -122,4 +122,24 @@ aside li {
   50% {
     transform: scaleY(1.1);
   }
+}
+#statistic {
+  color: #333333;
+  width: 30%;
+  height: 88vh;
+  background: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  right: 0;
+  top: 12vh;
+  padding: 40px;
+  transition: all 0.3s ease-in-out;
+}
+#statistic.close {
+  right: -25%;
+}
+p.close {
+  font-size: 2em;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }

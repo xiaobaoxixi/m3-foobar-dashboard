@@ -15,7 +15,8 @@ function popularBeer(totalCustomerCount, totalOrder) {
     eachBeerCountArray = eachBeerCountArray.filter(a => a.name !== bT); // don't log duplicate tap
     eachBeerCountArray.push({
       name: bT,
-      count: 0
+      count: 0,
+      percent: 0
     });
   }
   totalOrder.forEach(fillIn);
@@ -25,8 +26,13 @@ function popularBeer(totalCustomerCount, totalOrder) {
       let currentCount = eachBeerCountArray[i].count;
       if (eachOrder === beerN) {
         eachBeerCountArray[i].count = currentCount + 1;
+        eachBeerCountArray[i].percent =
+          eachBeerCountArray[i].count / totalBeerCount;
       }
     }
   }
-  console.log(eachBeerCountArray);
+  let sorted = eachBeerCountArray.sort(function compare(a, b) {
+    return b.percent - a.percent;
+  });
+  console.log(sorted);
 }

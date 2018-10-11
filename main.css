@@ -297,6 +297,6 @@ iframe {
 }
 @keyframes leanForward {
   to {
-    transform: skewX(10deg);
+    transform: skewX(13deg);
   }
 }

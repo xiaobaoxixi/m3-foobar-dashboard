@@ -371,6 +371,7 @@ function update() {
     document
       .querySelector(`[data-name='${bartenderName}']`)
       .setAttribute("data-servingCustomer", b.servingCustomer);
+    /** use this part if want to calculate work load share based on customer served by each bartender */
     // if (
     //   b.servingCustomer &&
     //   bartenderServed[i].indexOf(b.servingCustomer) < 0
